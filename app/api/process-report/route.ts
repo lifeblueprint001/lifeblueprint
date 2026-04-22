@@ -2,14 +2,6 @@ import OpenAI from "openai";
 import { Resend } from "resend";
 import Stripe from "stripe";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-
 function escapeHtml(text: string) {
   return text
     .replace(/&/g, "&amp;")
@@ -21,6 +13,25 @@ function escapeHtml(text: string) {
 
 export async function POST(req: Request) {
   try {
+    const openaiApiKey = process.env.OPENAI_API_KEY;
+    const resendApiKey = process.env.RESEND_API_KEY;
+    const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+
+    if (!openaiApiKey || !resendApiKey || !stripeSecretKey) {
+      return Response.json(
+        { error: "Missing server environment variables" },
+        { status: 500 }
+      );
+    }
+
+    const openai = new OpenAI({
+      apiKey: openaiApiKey,
+    });
+
+    const resend = new Resend(resendApiKey);
+
+    const stripe = new Stripe(stripeSecretKey);
+
     const body = await req.json();
 
     const {
