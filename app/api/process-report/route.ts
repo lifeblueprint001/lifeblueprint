@@ -1,6 +1,7 @@
 import OpenAI from "openai";
 import { Resend } from "resend";
 import Stripe from "stripe";
+import { createClient } from "@supabase/supabase-js";
 
 function escapeHtml(text: string) {
   return text
@@ -16,8 +17,16 @@ export async function POST(req: Request) {
     const openaiApiKey = process.env.OPENAI_API_KEY;
     const resendApiKey = process.env.RESEND_API_KEY;
     const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-    if (!openaiApiKey || !resendApiKey || !stripeSecretKey) {
+    if (
+      !openaiApiKey ||
+      !resendApiKey ||
+      !stripeSecretKey ||
+      !supabaseUrl ||
+      !supabaseKey
+    ) {
       return Response.json(
         { error: "Missing server environment variables" },
         { status: 500 }
@@ -29,8 +38,8 @@ export async function POST(req: Request) {
     });
 
     const resend = new Resend(resendApiKey);
-
     const stripe = new Stripe(stripeSecretKey);
+    const supabase = createClient(supabaseUrl, supabaseKey);
 
     const body = await req.json();
 
@@ -43,7 +52,14 @@ export async function POST(req: Request) {
       sessionId,
     } = body;
 
-    if (!fullName || !email || !birthDate || !birthTime || !birthPlace || !sessionId) {
+    if (
+      !fullName ||
+      !email ||
+      !birthDate ||
+      !birthTime ||
+      !birthPlace ||
+      !sessionId
+    ) {
       return Response.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -57,6 +73,31 @@ export async function POST(req: Request) {
         { error: "Payment not completed" },
         { status: 403 }
       );
+    }
+
+    // Anti-duplicate check:
+    // If this Stripe session already has a report, return it instead of generating again.
+    const { data: existingReport, error: existingReportError } = await supabase
+      .from("reports")
+      .select("*")
+      .eq("stripe_session_id", sessionId)
+      .maybeSingle();
+
+    if (existingReportError) {
+      console.error("Supabase existing report check error:", existingReportError);
+      return Response.json(
+        { error: "Failed to check existing report" },
+        { status: 500 }
+      );
+    }
+
+    if (existingReport) {
+      return Response.json({
+        success: true,
+        report: existingReport.report,
+        userResult: existingReport.email_sent ? { alreadySent: true } : null,
+        existing: true,
+      });
     }
 
     const prompt = `
@@ -107,6 +148,26 @@ STRUCTURE:
 
     const safeReport = escapeHtml(report);
 
+    const { error: insertError } = await supabase.from("reports").insert({
+      full_name: fullName,
+      email,
+      birth_date: birthDate,
+      birth_time: birthTime,
+      birth_place: birthPlace,
+      stripe_session_id: sessionId,
+      payment_status: "paid",
+      report,
+      email_sent: false,
+    });
+
+    if (insertError) {
+      console.error("Supabase insert error:", insertError);
+      return Response.json(
+        { error: "Failed to save report" },
+        { status: 500 }
+      );
+    }
+
     const adminResult = await resend.emails.send({
       from: "Life Blueprint <onboarding@resend.dev>",
       to: ["lifeblueprint001@gmail.com"],
@@ -123,6 +184,7 @@ STRUCTURE:
     });
 
     let userResult = null;
+    let emailSent = false;
 
     try {
       userResult = await resend.emails.send({
@@ -137,15 +199,23 @@ STRUCTURE:
           <p style="margin-top:20px;">Thank you for your trust.</p>
         `,
       });
+
+      emailSent = true;
     } catch (emailError) {
       console.error("User email failed:", emailError);
     }
+
+    await supabase
+      .from("reports")
+      .update({ email_sent: emailSent })
+      .eq("stripe_session_id", sessionId);
 
     return Response.json({
       success: true,
       report,
       adminResult,
       userResult,
+      existing: false,
     });
   } catch (error) {
     console.error("Process report error:", error);
