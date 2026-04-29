@@ -22,7 +22,7 @@ const [birthPlace, setBirthPlace] = useState("");
 
     localStorage.setItem("lifeBlueprintFormData", JSON.stringify(formData));
 
-    window.location.href = "https://buy.stripe.com/4gM3cxdbu20p1XU5oU63K00";
+    window.location.href = "https://buy.stripe.com/test_5kQ9AT7nWcoF1xb0FqeME00";
   };
 
   return (
