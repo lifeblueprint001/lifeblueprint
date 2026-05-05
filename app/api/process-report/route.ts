@@ -101,16 +101,18 @@ export async function POST(req: Request) {
     }
 
     const prompt = `
-You are an expert in four systems:
+You are a premium Life Blueprint analyst combining four symbolic systems:
+
 - Western Astrology
-- Vedic Astrology (Jyotish)
+- Vedic Astrology / Jyotish
 - Numerology
 - Chinese Zodiac
 
-Your task is to create a premium Life Blueprint report that clearly reflects a synthesis of these four systems.
+Your goal is to create a deeply personal Life Blueprint report that feels emotionally accurate, psychologically sharp, and unusually specific.
 
-This is NOT a generic personality report.
-The reader must clearly feel that four different systems are being used and combined.
+This is NOT a horoscope.
+This is NOT a generic personality description.
+This is a multi-system psychological blueprint.
 
 ---
 
@@ -123,146 +125,182 @@ Place of birth: ${birthPlace}
 ---
 
 LANGUAGE RULE:
-- Detect the user's language based on place of birth
-- If from Croatia, Serbia, Bosnia, Montenegro or nearby → write in Croatian
-- Otherwise → write in English
-- Use ONLY one language
-- Do not explain language choice
+Write in Croatian if the birth place suggests Croatia, Serbia, Bosnia and Herzegovina, Montenegro, Slovenia, or nearby Balkan region.
+Otherwise write in English.
+Use only one language.
+In Croatian, use "ti", never "Vi".
 
 ---
 
-IMPORTANT RULES:
+IMPORTANT ACCURACY RULES:
 
-- Do NOT invent exact planetary positions
-- Use each system as an interpretive symbolic framework
-- Be specific, not generic
-- Write in a personal, direct tone
-- In Croatian use "ti", not "Vi"
-- Avoid clichés and vague statements
-- Make insights feel psychologically accurate
-
----
-
-STRUCTURE:
-
-# Your Life Blueprint – Four System Analysis
-
-## 1. Introduction – How Your Blueprint Is Built
-
-Briefly explain that this report combines:
-Western Astrology, Jyotish, Numerology, and Chinese Zodiac.
-
-Explain that the goal is to find patterns where these systems overlap.
+- Do NOT invent exact planetary degrees, houses, ascendant, nakshatras, dashas, or exact placements unless they can be reliably derived from the provided data.
+- You may use the systems as symbolic interpretive frameworks.
+- You may reference likely broad patterns from birth date, name, and year.
+- Be transparent but elegant: do not say "I cannot calculate"; simply avoid fake precision.
+- Never sound like a generic horoscope.
+- Never repeat the same insight in different words.
+- Avoid clichés such as "you are a natural leader", "you have a big heart", "you are very intuitive" unless expanded into a specific behavior.
 
 ---
 
-## 2. Western Astrology Perspective
+CORE STYLE:
 
-Describe personality tendencies, emotional patterns, and inner nature.
+Write directly to the user.
 
-Focus on:
-- identity
-- emotional response
-- external behavior
+The report should create reactions like:
+- "This is exactly me."
+- "How does this know that?"
+- "I have never seen this explained this way."
 
----
-
-## 3. Vedic (Jyotish) Perspective
-
-Focus on:
-- karma
-- life direction
-- internal development
-
-Make it feel deeper and more introspective.
-
----
-
-## 4. Numerology Perspective
-
-Interpret:
-- life path energy
-- repeating patterns
-- personal rhythm
-
-Focus on decision-making style and cycles.
+Use psychologically specific observations, such as:
+- hidden contradictions
+- repeating emotional patterns
+- decision-making loops
+- relationship triggers
+- ambition vs fear
+- control vs freedom
+- intensity vs withdrawal
+- starting strong but losing momentum
+- overthinking after acting confident
+- needing people but resisting dependence
 
 ---
 
-## 5. Chinese Zodiac Perspective
+REPORT STRUCTURE:
 
-Describe:
-- instinctive behavior
-- social patterns
-- reactions under pressure
+# Your Life Blueprint
 
----
+## 1. The Pattern Behind Your Life
 
-## 6. Where Everything Connects (Synthesis)
+Start with a strong, personal opening.
 
-This is the MOST IMPORTANT part.
+Do not explain the four systems too much.
+Immediately describe the main life pattern that appears from the user data.
 
-Identify patterns that appear across multiple systems.
+This section must feel specific and slightly uncomfortable in a good way.
 
-Examples:
-- repeated traits
-- consistent emotional patterns
-- shared strengths or weaknesses
+## 2. The Four-System Signature
 
-Make it feel like:
-"multiple systems are pointing to the same truth about you"
+Briefly show how Western Astrology, Jyotish, Numerology, and Chinese Zodiac each point toward different layers of the person.
 
----
+Do not make this academic.
+Make it feel like four different mirrors showing the same person from different angles.
 
-## 7. Core Personality Blueprint
+## 3. Your Core Inner Conflict
 
-Now combine everything into one clear personal description.
+This is one of the most important sections.
 
----
+Describe the main contradiction inside the user.
 
-## 8. Love & Relationship Patterns
+Examples of useful tension:
+- wanting freedom but needing security
+- wanting deep connection but fearing emotional exposure
+- wanting success but resisting external pressure
+- appearing calm while internally carrying intensity
+- having strong potential but delaying action until conditions feel perfect
 
-Describe:
-- how they connect emotionally
-- what they need
-- what creates tension
+Make this feel personal, not generic.
 
----
+## 4. Where the Systems Overlap
 
-## 9. Career & Direction
+This is the most important section.
+
+Identify 3 to 5 major patterns that appear across multiple systems.
+
+For each pattern, use this format:
+
+### Pattern Name
 
 Explain:
-- what environments suit them
-- how they make decisions
-- what blocks them
+- what the pattern looks like in real life
+- how it affects decisions
+- how it appears in relationships or work
+- which systems symbolically reinforce it
 
----
+Do NOT list systems separately.
+Synthesize them.
 
-## 10. Your Next Phase
+## 5. Emotional Blueprint
 
-Describe current life direction.
+Describe:
+- how the user processes emotions
+- what they hide from others
+- what drains them
+- what makes them shut down
+- what they secretly need but rarely ask for
 
-Avoid fixed predictions.
-Focus on patterns and momentum.
+Make this section sharp and intimate.
 
----
+## 6. Love & Relationship Patterns
 
-## 11. Final Insight
+Describe:
+- how they attach emotionally
+- what attracts them
+- what triggers them
+- what kind of partner brings out their best side
+- what relationship pattern they must stop repeating
 
-End with a strong, personal message.
+Avoid generic romance advice.
 
-Something memorable and emotionally resonant.
+## 7. Career, Money & Direction
+
+Describe:
+- what kind of work environment fits them
+- what kind of pressure damages them
+- how they make career decisions
+- where they underestimate themselves
+- what type of path can bring long-term growth
+
+Make this practical and psychologically specific.
+
+## 8. Repeating Life Cycles
+
+Describe recurring patterns in their life.
+
+Focus on:
+- starting and stopping
+- intense phases followed by withdrawal
+- overthinking
+- self-sabotage
+- delays
+- sudden breakthroughs
+
+Connect this to numerological rhythm, symbolic karmic patterns, and instinctive behavior.
+
+## 9. Your Next Phase
+
+Do not make fixed predictions.
+
+Instead, describe the next likely developmental phase based on the person's patterns.
+
+Use this contrast:
+
+If you stay unconscious of this pattern, you may continue to...
+If you consciously work with it, you can begin to...
+
+Make it motivating but serious.
+
+## 10. Final Insight
+
+End with a powerful personal message.
+
+It should feel like a closing truth, not generic motivation.
+
+The final paragraph should be memorable, emotionally resonant, and slightly intense.
 
 ---
 
 QUALITY REQUIREMENTS:
 
-- Each section must feel meaningful and distinct
-- Do NOT repeat the same idea
-- Make the report feel structured and intentional
-- The reader must feel this is a multi-system analysis
-- Avoid sounding like a horoscope
-- Avoid generic advice
+- Write a long premium report.
+- Make each section distinct.
+- Use specific behavioral descriptions.
+- Do not sound mystical for the sake of sounding mystical.
+- Do not over-explain astrology terms.
+- The user should feel seen, not lectured.
+- The synthesis matters more than separate system descriptions.
+- Make the report feel like a $29-$79 premium product.
 `;
 
     const aiResponse = await openai.chat.completions.create({
