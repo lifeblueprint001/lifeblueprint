@@ -11,7 +11,91 @@ function escapeHtml(text: string) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
+function getWesternZodiacSign(birthDate: string) {
+  const date = new Date(birthDate);
+  const day = date.getUTCDate();
+  const month = date.getUTCMonth() + 1;
 
+  if ((month === 3 && day >= 21) || (month === 4 && day <= 19)) return "Aries";
+  if ((month === 4 && day >= 20) || (month === 5 && day <= 20)) return "Taurus";
+  if ((month === 5 && day >= 21) || (month === 6 && day <= 20)) return "Gemini";
+  if ((month === 6 && day >= 21) || (month === 7 && day <= 22)) return "Cancer";
+  if ((month === 7 && day >= 23) || (month === 8 && day <= 22)) return "Leo";
+  if ((month === 8 && day >= 23) || (month === 9 && day <= 22)) return "Virgo";
+  if ((month === 9 && day >= 23) || (month === 10 && day <= 22)) return "Libra";
+  if ((month === 10 && day >= 23) || (month === 11 && day <= 21)) return "Scorpio";
+  if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) return "Sagittarius";
+  if ((month === 12 && day >= 22) || (month === 1 && day <= 19)) return "Capricorn";
+  if ((month === 1 && day >= 20) || (month === 2 && day <= 18)) return "Aquarius";
+  return "Pisces";
+}
+
+function getChineseZodiacSign(birthDate: string) {
+  const year = new Date(birthDate).getUTCFullYear();
+
+  const animals = [
+    "Rat",
+    "Ox",
+    "Tiger",
+    "Rabbit",
+    "Dragon",
+    "Snake",
+    "Horse",
+    "Goat",
+    "Monkey",
+    "Rooster",
+    "Dog",
+    "Pig",
+  ];
+
+  return animals[(year - 1900) % 12];
+}
+
+function reduceToCoreNumber(num: number): number {
+  while (num > 9 && num !== 11 && num !== 22 && num !== 33) {
+    num = num
+      .toString()
+      .split("")
+      .reduce((sum, digit) => sum + Number(digit), 0);
+  }
+
+  return num;
+}
+
+function calculateLifePathNumber(birthDate: string) {
+  const digits = birthDate.replace(/\D/g, "");
+
+  const total = digits
+    .split("")
+    .reduce((sum, digit) => sum + Number(digit), 0);
+
+  return reduceToCoreNumber(total);
+}
+
+function calculateExpressionNumber(fullName: string) {
+  const values: Record<string, number> = {
+    A: 1, J: 1, S: 1,
+    B: 2, K: 2, T: 2,
+    C: 3, L: 3, U: 3,
+    D: 4, M: 4, V: 4,
+    E: 5, N: 5, W: 5,
+    F: 6, O: 6, X: 6,
+    G: 7, P: 7, Y: 7,
+    H: 8, Q: 8, Z: 8,
+    I: 9, R: 9,
+  };
+
+  const normalized = fullName
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toUpperCase();
+
+  const total = normalized
+    .split("")
+    .reduce((sum, char) => sum + (values[char] || 0), 0);
+
+  return reduceToCoreNumber(total);
+}
 export async function POST(req: Request) {
   try {
     const openaiApiKey = process.env.OPENAI_API_KEY;
@@ -51,6 +135,12 @@ export async function POST(req: Request) {
       birthPlace,
       sessionId,
     } = body;
+
+    const westernSign = getWesternZodiacSign(birthDate);
+    const chineseSign = getChineseZodiacSign(birthDate);
+    const lifePathNumber = calculateLifePathNumber(birthDate);
+    const expressionNumber = calculateExpressionNumber(fullName);                                                                                                                       
+
 
     if (
       !fullName ||
@@ -122,6 +212,12 @@ Date of birth: ${birthDate}
 Time of birth: ${birthTime}
 Place of birth: ${birthPlace}
 
+CALCULATED SYMBOLIC DATA:
+Western Zodiac Sign: ${westernSign}
+Chinese Zodiac Sign: ${chineseSign}
+Life Path Number: ${lifePathNumber}
+Expression / Destiny Number: ${expressionNumber}
+
 ---
 
 LANGUAGE RULE:
@@ -132,15 +228,19 @@ In Croatian, use "ti", never "Vi".
 
 ---
 
-IMPORTANT ACCURACY RULES:
+CRITICAL ACCURACY RULES:
 
-- Do NOT invent exact planetary degrees, houses, ascendant, nakshatras, dashas, or exact placements unless they can be reliably derived from the provided data.
-- You may use the systems as symbolic interpretive frameworks.
-- You may reference likely broad patterns from birth date, name, and year.
-- Be transparent but elegant: do not say "I cannot calculate"; simply avoid fake precision.
-- Never sound like a generic horoscope.
-- Never repeat the same insight in different words.
-- Avoid clichés such as "you are a natural leader", "you have a big heart", "you are very intuitive" unless expanded into a specific behavior.
+- You MUST actively use the calculated symbolic data.
+- Always mention the Western Zodiac sign, Chinese Zodiac sign, Life Path Number, and Expression / Destiny Number by name.
+- Do NOT say "your sign" without naming the actual sign or number.
+- Do NOT invent ascendant, moon sign, houses, nakshatras, dashas, planetary degrees, or exact planetary placements.
+- Use Western Sun sign, Chinese Zodiac sign, Life Path Number, and Expression Number as the verified symbolic base.
+- Use Jyotish as a symbolic karmic and introspective framework, but do not claim exact Vedic placements.
+- Be specific, not generic.
+- Write in a personal, direct tone.
+- Avoid clichés and vague statements.
+- Do not repeat the same idea in different words.
+- Make insights feel psychologically accurate.
 
 ---
 
@@ -153,7 +253,7 @@ The report should create reactions like:
 - "How does this know that?"
 - "I have never seen this explained this way."
 
-Use psychologically specific observations, such as:
+Focus on:
 - hidden contradictions
 - repeating emotional patterns
 - decision-making loops
@@ -165,63 +265,86 @@ Use psychologically specific observations, such as:
 - overthinking after acting confident
 - needing people but resisting dependence
 
+Do NOT write like a newspaper horoscope.
+Do NOT over-explain astrology.
+Do NOT sound mystical just to sound mystical.
+
 ---
 
 REPORT STRUCTURE:
 
-# Your Life Blueprint
+# Tvoj Životni Plan
 
-## 1. The Pattern Behind Your Life
+## 1. Glavni Obrazac Tvog Života
 
 Start with a strong, personal opening.
 
-Do not explain the four systems too much.
-Immediately describe the main life pattern that appears from the user data.
+Immediately describe the main life pattern visible from the combination of:
+- ${westernSign}
+- Chinese Zodiac: ${chineseSign}
+- Life Path Number: ${lifePathNumber}
+- Expression Number: ${expressionNumber}
 
 This section must feel specific and slightly uncomfortable in a good way.
 
-## 2. The Four-System Signature
+Do not start with generic lines like:
+"Your existence carries strong energy..."
+"Your journey is complex..."
+"You are a unique person..."
 
-Briefly show how Western Astrology, Jyotish, Numerology, and Chinese Zodiac each point toward different layers of the person.
+Start directly with a concrete psychological pattern.
 
-Do not make this academic.
-Make it feel like four different mirrors showing the same person from different angles.
+## 2. Tvoj Četverostruki Energetski Potpis
 
-## 3. Your Core Inner Conflict
+Explain how the four systems describe different layers of the person:
 
-This is one of the most important sections.
+- Western Astrology: identity and outward personality through ${westernSign}
+- Jyotish: karmic direction and inner development, without fake exact placements
+- Numerology: life rhythm through Life Path ${lifePathNumber} and Expression ${expressionNumber}
+- Chinese Zodiac: instinctive behavior through ${chineseSign}
 
-Describe the main contradiction inside the user.
+Make this section clear but not academic.
 
-Examples of useful tension:
-- wanting freedom but needing security
-- wanting deep connection but fearing emotional exposure
-- wanting success but resisting external pressure
-- appearing calm while internally carrying intensity
-- having strong potential but delaying action until conditions feel perfect
+## 3. Tvoj Glavni Unutarnji Sukob
 
-Make this feel personal, not generic.
+Describe the central contradiction inside the user.
 
-## 4. Where the Systems Overlap
+Make it concrete.
 
-This is the most important section.
+Focus on questions like:
+- What do they want but resist?
+- What do they show outside but hide inside?
+- Where do they sabotage themselves?
+- What pattern repeats when pressure increases?
 
-Identify 3 to 5 major patterns that appear across multiple systems.
+Avoid generic emotional language.
+
+## 4. Gdje Se Sustavi Preklapaju
+
+This is the MOST IMPORTANT section.
+
+Identify 4 major patterns that appear across multiple systems.
 
 For each pattern, use this format:
 
 ### Pattern Name
 
-Explain:
-- what the pattern looks like in real life
+Write:
+- what this pattern looks like in daily life
 - how it affects decisions
 - how it appears in relationships or work
-- which systems symbolically reinforce it
+- which calculated symbols reinforce it
 
-Do NOT list systems separately.
+You MUST mention actual values:
+- ${westernSign}
+- ${chineseSign}
+- Life Path ${lifePathNumber}
+- Expression ${expressionNumber}
+
+Do not list systems separately.
 Synthesize them.
 
-## 5. Emotional Blueprint
+## 5. Emocionalni Blueprint
 
 Describe:
 - how the user processes emotions
@@ -230,9 +353,13 @@ Describe:
 - what makes them shut down
 - what they secretly need but rarely ask for
 
-Make this section sharp and intimate.
+Make this section sharp, intimate, and behavior-based.
 
-## 6. Love & Relationship Patterns
+Avoid sentences like:
+"You feel emotions deeply."
+Instead write specific behaviors.
+
+## 6. Ljubav i Odnosi
 
 Describe:
 - how they attach emotionally
@@ -241,38 +368,41 @@ Describe:
 - what kind of partner brings out their best side
 - what relationship pattern they must stop repeating
 
-Avoid generic romance advice.
+Make this feel personal and psychologically accurate.
 
-## 7. Career, Money & Direction
+## 7. Karijera, Novac i Smjer
 
 Describe:
-- what kind of work environment fits them
-- what kind of pressure damages them
+- what work environment fits them
+- what pressure damages them
 - how they make career decisions
 - where they underestimate themselves
-- what type of path can bring long-term growth
+- what path can bring long-term growth
 
-Make this practical and psychologically specific.
+Make it practical, specific, and useful.
 
-## 8. Repeating Life Cycles
+## 8. Životni Ciklusi Koji Se Ponavljaju
 
-Describe recurring patterns in their life.
+Describe recurring patterns in their life:
 
-Focus on:
-- starting and stopping
-- intense phases followed by withdrawal
+- starting strong then losing momentum
+- intense focus followed by withdrawal
 - overthinking
 - self-sabotage
 - delays
 - sudden breakthroughs
+- repeating relationship or career loops
 
-Connect this to numerological rhythm, symbolic karmic patterns, and instinctive behavior.
+Connect this to:
+- Life Path ${lifePathNumber}
+- Expression ${expressionNumber}
+- ${westernSign}
+- ${chineseSign}
+- symbolic Jyotish karmic interpretation
 
-## 9. Your Next Phase
+## 9. Tvoja Sljedeća Faza
 
 Do not make fixed predictions.
-
-Instead, describe the next likely developmental phase based on the person's patterns.
 
 Use this contrast:
 
@@ -281,13 +411,13 @@ If you consciously work with it, you can begin to...
 
 Make it motivating but serious.
 
-## 10. Final Insight
+## 10. Konačna Poruka
 
 End with a powerful personal message.
 
-It should feel like a closing truth, not generic motivation.
+The closing should feel like a truth the user needed to hear.
 
-The final paragraph should be memorable, emotionally resonant, and slightly intense.
+Avoid generic motivational language.
 
 ---
 
@@ -296,10 +426,10 @@ QUALITY REQUIREMENTS:
 - Write a long premium report.
 - Make each section distinct.
 - Use specific behavioral descriptions.
-- Do not sound mystical for the sake of sounding mystical.
-- Do not over-explain astrology terms.
-- The user should feel seen, not lectured.
 - The synthesis matters more than separate system descriptions.
+- Every major section should connect back to actual calculated symbolic data.
+- Avoid fake precision.
+- Avoid generic horoscope language.
 - Make the report feel like a $29-$79 premium product.
 `;
 
