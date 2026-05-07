@@ -190,58 +190,289 @@ export async function POST(req: Request) {
       });
     }
 
-  const profilePrompt = `  
-Create a deep psychological profile based on:
+const profilePrompt = `
+You are creating an internal psychological-symbolic profile.
 
-Western Sign: ${westernSign}
-Chinese Zodiac: ${chineseSign}
-Life Path: ${lifePathNumber}
-Expression Number: ${expressionNumber}
+This profile is NOT shown to the user.
 
-Write:
+USER DATA:
+Full name: ${fullName}
+Date of birth: ${birthDate}
+Time of birth: ${birthTime}
+Place of birth: ${birthPlace}
 
-- 5 personality patterns (real-life behavior)
-- 3 internal conflicts
-- 3 repeating life loops
-- 2 hidden fears
-- 2 underused strengths
+CALCULATED SYMBOLIC DATA:
+Western Zodiac Sign: ${westernSign}
+Chinese Zodiac Sign: ${chineseSign}
+Life Path Number: ${lifePathNumber}
+Expression / Destiny Number: ${expressionNumber}
 
-Be specific.
-Avoid generic statements.
-Do NOT write a report.
+TASK:
+Create a sharp internal profile.
+
+RULES:
+- Do NOT write a report.
+- Do NOT give advice.
+- Do NOT use generic horoscope language.
+- Do NOT invent ascendant, moon sign, houses, nakshatras, dashas, degrees or exact planetary placements.
+- Use the symbolic data as psychological archetypes.
+- Every insight must describe behavior, not traits.
+
+Create:
+
+1. CORE LIFE TENSION
+One strong paragraph.
+
+2. 7 BEHAVIORAL PATTERNS
+Each pattern must include:
+- what the person does in real life
+- what triggers it
+- what they hide from others
+- what it costs them
+- which symbols reinforce it
+
+3. 5 UNCOMFORTABLE TRUTHS
+Sharp sentences that may feel too accurate.
+
+4. RELATIONSHIP LOOP
+Describe their repeated emotional pattern in love.
+
+5. CAREER LOOP
+Describe their repeated pattern with ambition, discipline, money and direction.
+
+6. SELF-SABOTAGE LOOP
+Describe how they delay, escape, overthink, restart or abandon things.
+
+7. TRANSFORMATION EDGE
+What life is forcing them to confront.
+
+Make it psychologically specific, emotionally sharp, and not motivational.
 `;
 
-    const profileCompletion = await openai.chat.completions.create({
+   const profileResponse = await openai.chat.completions.create({
   model: "gpt-4o-mini",
   messages: [
-    { role: "user", content: profilePrompt }
+    {
+      role: "user",
+      content: profilePrompt,
+    },
   ],
+  temperature: 0.9,
 });
 
 const internalProfile =
-  profileCompletion.choices[0]?.message?.content || "";
+  profileResponse.choices[0]?.message?.content || "";
 
-    const reportPrompt = `
-Use this psychological profile:
+ const reportPrompt = `
+You are writing a premium Life Blueprint report.
+
+Use this internal profile as source material:
 
 ${internalProfile}
 
-Write a premium Life Blueprint report.
+USER DATA:
+Full name: ${fullName}
+Date of birth: ${birthDate}
+Time of birth: ${birthTime}
+Place of birth: ${birthPlace}
 
-RULES:
-- Write in Croatian
-- Be personal and specific
-- Avoid generic phrases
-- Expand into real-life situations
-- Use:
-  - ${westernSign}
-  - ${chineseSign}
-  - Life Path ${lifePathNumber}
-  - Expression ${expressionNumber}
+CALCULATED SYMBOLIC DATA:
+Western Zodiac Sign: ${westernSign}
+Chinese Zodiac Sign: ${chineseSign}
+Life Path Number: ${lifePathNumber}
+Expression / Destiny Number: ${expressionNumber}
 
-Make it feel like a paid product.
+LANGUAGE RULE:
+Write in Croatian if the birth place suggests Croatia, Serbia, Bosnia and Herzegovina, Montenegro, Slovenia, or nearby Balkan region.
+Otherwise write in English.
+Use only one language.
+In Croatian, use "ti", never "Vi".
 
-Write a long structured report.
+ABSOLUTE RULES:
+- Do NOT sound like a horoscope.
+- Do NOT sound like generic AI advice.
+- Do NOT give advice in the first 80% of the report.
+- Do NOT use phrases like "trebao bi", "pokušaj", "preporučujem", "razmotri", "bilo bi dobro".
+- Do NOT write in formal Croatian.
+- Use "ti", not "Vi".
+- Do NOT invent exact astrology placements.
+- Do NOT over-explain systems.
+- Do NOT repeat the same pattern with different words.
+- Do NOT use generic phrases like:
+  "imaš veliki potencijal"
+  "jako si intuitivan"
+  "orijentiran si na detalje"
+  "tvoje putovanje je složeno"
+  "moraš vjerovati u sebe"
+
+CORE WRITING STYLE:
+Write like a direct private analysis.
+Sharp, intimate, grounded, psychologically precise.
+
+The text should feel like:
+"ovo me pogodilo"
+"ovo nisam očekivao"
+"ovo je neugodno točno"
+
+Do not motivate first.
+Expose first.
+Only at the end open the door toward transformation.
+
+CRITICAL SYNTHESIS RULE:
+Every major insight must connect at least 2 systems together.
+
+Use:
+- Western sign: ${westernSign}
+- Chinese Zodiac: ${chineseSign}
+- Life Path: ${lifePathNumber}
+- Expression Number: ${expressionNumber}
+- Jyotish only as symbolic karmic/introspective layer
+
+Do NOT describe systems separately for too long.
+Merge them into behavior.
+
+EXAMPLE STYLE:
+Not:
+"Kao Djevica, ti si organiziran."
+
+Better:
+"${westernSign} ti daje potrebu da stvari imaju smisao prije nego kreneš, dok Life Path ${lifePathNumber} u tebi stalno otvara nemir prema novom. Zato često izgleda kao da znaš što radiš, ali iznutra istovremeno tražiš izlaz iz vlastitog plana."
+
+REPORT STRUCTURE:
+
+# Tvoj Životni Blueprint
+
+## 1. Prva Istina
+
+Start brutally directly.
+No introduction.
+No explanation of systems.
+
+Open with the main repeating pattern in their life.
+
+The first paragraph must feel personal and specific.
+
+## 2. Obrazac Koji Te Najviše Vodi
+
+Explain the dominant life pattern created by:
+- ${westernSign}
+- ${chineseSign}
+- Life Path ${lifePathNumber}
+- Expression ${expressionNumber}
+
+Make it one connected psychological explanation.
+
+## 3. Tvoj Glavni Unutarnji Rascjep
+
+Describe the contradiction they live with.
+
+Use real-life behaviors:
+- how they start things
+- how they withdraw
+- how they overthink
+- what they show others
+- what they hide
+- where they sabotage momentum
+
+## 4. Četiri Obrasca Koja Se Stalno Ponavljaju
+
+Create exactly 4 patterns.
+
+Each pattern must have:
+
+### Pattern name
+
+Then write:
+- what this looks like in daily life
+- why people misunderstand it
+- how it affects love
+- how it affects work
+- what it costs them internally
+- which 2 or more systems point to the pattern
+
+Make each pattern distinct.
+
+## 5. Ono Što Ne Govoriš Naglas
+
+This section must be intimate.
+
+Describe:
+- what they do not admit easily
+- what hurts more than they show
+- what drains them
+- what they pretend does not matter
+- what they secretly need but rarely ask for
+
+Include at least 5 sentences that feel slightly uncomfortable but true.
+
+## 6. Ljubav: Tvoj Emocionalni Kod
+
+Describe:
+- how they attach
+- what they attract
+- what they test in others
+- when they pull away
+- what kind of person sees through their defenses
+- what relationship loop keeps repeating
+
+No generic relationship advice.
+
+## 7. Karijera, Novac i Smjer
+
+Describe:
+- how ambition works in them
+- why they can start intensely and then stall
+- what kind of work kills their energy
+- what kind of work activates them
+- how they relate to money, security and freedom
+- where they underestimate themselves
+
+Make it concrete.
+
+## 8. Tvoje Skrivene Snage
+
+Do not list obvious strengths.
+Describe strengths that came from pressure, contradiction, observation, survival, sensitivity or discipline.
+
+## 9. Tvoje Slijepe Točke
+
+Be honest.
+
+Describe:
+- what they delay
+- what they rationalize
+- where they confuse thinking with progress
+- where they choose control instead of growth
+- where they already know the truth but wait too long to act
+
+## 10. Sljedeća Faza
+
+Now, and only now, shift toward transformation.
+
+Use this structure:
+
+Ako nastaviš po starom obrascu...
+Ako postaneš svjestan tog obrasca...
+Sljedeća faza od tebe traži...
+
+Do not make fixed predictions.
+Make it serious and grounded.
+
+## 11. Konačna Poruka
+
+End with a strong final message.
+No clichés.
+No generic motivation.
+It should feel like a personal closing truth.
+
+LENGTH:
+Minimum 2200 words.
+Maximum 3500 words.
+
+QUALITY BAR:
+This must feel like a paid premium product.
+It must be sharper, deeper and more personal than a free AI horoscope.
+The user should feel exposed, understood and emotionally hit.
 `;
 
     const reportResponse = await openai.chat.completions.create({
