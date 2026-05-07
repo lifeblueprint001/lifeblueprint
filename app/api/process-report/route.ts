@@ -190,262 +190,73 @@ export async function POST(req: Request) {
       });
     }
 
-    const prompt = `
-You are a premium Life Blueprint analyst combining four symbolic systems:
+  const profilePrompt = `  
+Create a deep psychological profile based on:
 
-- Western Astrology
-- Vedic Astrology / Jyotish
-- Numerology
-- Chinese Zodiac
-
-Your goal is to create a deeply personal Life Blueprint report that feels emotionally accurate, psychologically sharp, and unusually specific.
-
-This is NOT a horoscope.
-This is NOT a generic personality description.
-This is a multi-system psychological blueprint.
-
----
-
-USER DATA:
-Full name: ${fullName}
-Date of birth: ${birthDate}
-Time of birth: ${birthTime}
-Place of birth: ${birthPlace}
-
-CALCULATED SYMBOLIC DATA:
-Western Zodiac Sign: ${westernSign}
-Chinese Zodiac Sign: ${chineseSign}
-Life Path Number: ${lifePathNumber}
-Expression / Destiny Number: ${expressionNumber}
-
----
-
-LANGUAGE RULE:
-Write in Croatian if the birth place suggests Croatia, Serbia, Bosnia and Herzegovina, Montenegro, Slovenia, or nearby Balkan region.
-Otherwise write in English.
-Use only one language.
-In Croatian, use "ti", never "Vi".
-
----
-
-CRITICAL ACCURACY RULES:
-
-- You MUST actively use the calculated symbolic data.
-- Always mention the Western Zodiac sign, Chinese Zodiac sign, Life Path Number, and Expression / Destiny Number by name.
-- Do NOT say "your sign" without naming the actual sign or number.
-- Do NOT invent ascendant, moon sign, houses, nakshatras, dashas, planetary degrees, or exact planetary placements.
-- Use Western Sun sign, Chinese Zodiac sign, Life Path Number, and Expression Number as the verified symbolic base.
-- Use Jyotish as a symbolic karmic and introspective framework, but do not claim exact Vedic placements.
-- Be specific, not generic.
-- Write in a personal, direct tone.
-- Avoid clichés and vague statements.
-- Do not repeat the same idea in different words.
-- Make insights feel psychologically accurate.
-
----
-
-CORE STYLE:
-
-Write directly to the user.
-
-The report should create reactions like:
-- "This is exactly me."
-- "How does this know that?"
-- "I have never seen this explained this way."
-
-Focus on:
-- hidden contradictions
-- repeating emotional patterns
-- decision-making loops
-- relationship triggers
-- ambition vs fear
-- control vs freedom
-- intensity vs withdrawal
-- starting strong but losing momentum
-- overthinking after acting confident
-- needing people but resisting dependence
-
-Do NOT write like a newspaper horoscope.
-Do NOT over-explain astrology.
-Do NOT sound mystical just to sound mystical.
-
----
-
-REPORT STRUCTURE:
-
-# Tvoj Životni Plan
-
-## 1. Glavni Obrazac Tvog Života
-
-Start with a strong, personal opening.
-
-Immediately describe the main life pattern visible from the combination of:
-- ${westernSign}
-- Chinese Zodiac: ${chineseSign}
-- Life Path Number: ${lifePathNumber}
-- Expression Number: ${expressionNumber}
-
-This section must feel specific and slightly uncomfortable in a good way.
-
-Do not start with generic lines like:
-"Your existence carries strong energy..."
-"Your journey is complex..."
-"You are a unique person..."
-
-Start directly with a concrete psychological pattern.
-
-## 2. Tvoj Četverostruki Energetski Potpis
-
-Explain how the four systems describe different layers of the person:
-
-- Western Astrology: identity and outward personality through ${westernSign}
-- Jyotish: karmic direction and inner development, without fake exact placements
-- Numerology: life rhythm through Life Path ${lifePathNumber} and Expression ${expressionNumber}
-- Chinese Zodiac: instinctive behavior through ${chineseSign}
-
-Make this section clear but not academic.
-
-## 3. Tvoj Glavni Unutarnji Sukob
-
-Describe the central contradiction inside the user.
-
-Make it concrete.
-
-Focus on questions like:
-- What do they want but resist?
-- What do they show outside but hide inside?
-- Where do they sabotage themselves?
-- What pattern repeats when pressure increases?
-
-Avoid generic emotional language.
-
-## 4. Gdje Se Sustavi Preklapaju
-
-This is the MOST IMPORTANT section.
-
-Identify 4 major patterns that appear across multiple systems.
-
-For each pattern, use this format:
-
-### Pattern Name
+Western Sign: ${westernSign}
+Chinese Zodiac: ${chineseSign}
+Life Path: ${lifePathNumber}
+Expression Number: ${expressionNumber}
 
 Write:
-- what this pattern looks like in daily life
-- how it affects decisions
-- how it appears in relationships or work
-- which calculated symbols reinforce it
 
-You MUST mention actual values:
-- ${westernSign}
-- ${chineseSign}
-- Life Path ${lifePathNumber}
-- Expression ${expressionNumber}
+- 5 personality patterns (real-life behavior)
+- 3 internal conflicts
+- 3 repeating life loops
+- 2 hidden fears
+- 2 underused strengths
 
-Do not list systems separately.
-Synthesize them.
-
-## 5. Emocionalni Blueprint
-
-Describe:
-- how the user processes emotions
-- what they hide from others
-- what drains them
-- what makes them shut down
-- what they secretly need but rarely ask for
-
-Make this section sharp, intimate, and behavior-based.
-
-Avoid sentences like:
-"You feel emotions deeply."
-Instead write specific behaviors.
-
-## 6. Ljubav i Odnosi
-
-Describe:
-- how they attach emotionally
-- what attracts them
-- what triggers them
-- what kind of partner brings out their best side
-- what relationship pattern they must stop repeating
-
-Make this feel personal and psychologically accurate.
-
-## 7. Karijera, Novac i Smjer
-
-Describe:
-- what work environment fits them
-- what pressure damages them
-- how they make career decisions
-- where they underestimate themselves
-- what path can bring long-term growth
-
-Make it practical, specific, and useful.
-
-## 8. Životni Ciklusi Koji Se Ponavljaju
-
-Describe recurring patterns in their life:
-
-- starting strong then losing momentum
-- intense focus followed by withdrawal
-- overthinking
-- self-sabotage
-- delays
-- sudden breakthroughs
-- repeating relationship or career loops
-
-Connect this to:
-- Life Path ${lifePathNumber}
-- Expression ${expressionNumber}
-- ${westernSign}
-- ${chineseSign}
-- symbolic Jyotish karmic interpretation
-
-## 9. Tvoja Sljedeća Faza
-
-Do not make fixed predictions.
-
-Use this contrast:
-
-If you stay unconscious of this pattern, you may continue to...
-If you consciously work with it, you can begin to...
-
-Make it motivating but serious.
-
-## 10. Konačna Poruka
-
-End with a powerful personal message.
-
-The closing should feel like a truth the user needed to hear.
-
-Avoid generic motivational language.
-
----
-
-QUALITY REQUIREMENTS:
-
-- Write a long premium report.
-- Make each section distinct.
-- Use specific behavioral descriptions.
-- The synthesis matters more than separate system descriptions.
-- Every major section should connect back to actual calculated symbolic data.
-- Avoid fake precision.
-- Avoid generic horoscope language.
-- Make the report feel like a $29-$79 premium product.
+Be specific.
+Avoid generic statements.
+Do NOT write a report.
 `;
 
-    const aiResponse = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [
-        {
-          role: "user",
-          content: prompt,
-        },
-      ],
-      temperature: 0.8,
-    });
+    const profileCompletion = await openai.chat.completions.create({
+  model: "gpt-4o-mini",
+  messages: [
+    { role: "user", content: profilePrompt }
+  ],
+});
 
-    const report =
-      aiResponse.choices[0]?.message?.content || "No report generated.";
+const internalProfile =
+  profileCompletion.choices[0]?.message?.content || "";
+
+    const reportPrompt = `
+Use this psychological profile:
+
+${internalProfile}
+
+Write a premium Life Blueprint report.
+
+RULES:
+- Write in Croatian
+- Be personal and specific
+- Avoid generic phrases
+- Expand into real-life situations
+- Use:
+  - ${westernSign}
+  - ${chineseSign}
+  - Life Path ${lifePathNumber}
+  - Expression ${expressionNumber}
+
+Make it feel like a paid product.
+
+Write a long structured report.
+`;
+
+    const reportResponse = await openai.chat.completions.create({
+  model: "gpt-4o-mini",
+  messages: [
+    {
+      role: "user",
+      content: reportPrompt,
+    },
+  ],
+  temperature: 0.85,
+});
+
+const report =
+  reportResponse.choices[0]?.message?.content || "No report generated.";
 
     const safeReport = escapeHtml(report);
 
