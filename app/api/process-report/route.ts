@@ -96,6 +96,51 @@ function calculateExpressionNumber(fullName: string) {
 
   return reduceToCoreNumber(total);
 }
+async function getNatalChartData({
+  birthDate,
+  birthTime,
+  lat,
+  lon,
+  tzone,
+}: {
+  birthDate: string;
+  birthTime: string;
+  lat: number;
+  lon: number;
+  tzone: number;
+}) {
+  const [year, month, day] = birthDate.split("-").map(Number);
+  const [hour, min] = birthTime.split(":").map(Number);
+
+  const response = await fetch(
+    "https://json.astrologyapi.com/v1/western_horoscope",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-astrologyapi-key": process.env.ASTROLOGY_API_KEY!,
+      },
+      body: JSON.stringify({
+        day,
+        month,
+        year,
+        hour,
+        min,
+        lat,
+        lon,
+        tzone,
+        house_type: "placidus",
+        is_asteroids: "false",
+      }),
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Astrology API error");
+  }
+
+  return await response.json();
+}
 export async function POST(req: Request) {
   try {
     const openaiApiKey = process.env.OPENAI_API_KEY;
@@ -136,6 +181,15 @@ export async function POST(req: Request) {
       sessionId,
     } = body;
 
+    const natalData = await getNatalChartData({
+  birthDate,
+  birthTime,
+  lat: 46.3844,
+  lon: 16.4339,
+  tzone: 1,
+});
+
+console.log("ASTRO DATA:", natalData);
     const westernSign = getWesternZodiacSign(birthDate);
     const chineseSign = getChineseZodiacSign(birthDate);
     const lifePathNumber = calculateLifePathNumber(birthDate);
