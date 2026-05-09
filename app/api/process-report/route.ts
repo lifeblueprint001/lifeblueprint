@@ -118,6 +118,7 @@ async function getNatalChartData({
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Accept-Language": "en",
         "x-astrologyapi-key": process.env.ASTROLOGY_API_KEY!,
       },
       body: JSON.stringify({
@@ -188,7 +189,6 @@ export async function POST(req: Request) {
   lon: 16.4339,
   tzone: 1,
 });
-
 console.log("ASTRO DATA:", natalData);
     const westernSign = getWesternZodiacSign(birthDate);
     const chineseSign = getChineseZodiacSign(birthDate);
