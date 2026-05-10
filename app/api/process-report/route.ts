@@ -189,6 +189,17 @@ export async function POST(req: Request) {
   lon: 16.4339,
   tzone: 1,
 });
+if (natalData?.errorType || natalData?.errorMessage) {
+  console.error("ASTROLOGY API FAILED:", natalData);
+
+  return Response.json(
+    {
+      error: "Astrology API failed",
+      details: natalData,
+    },
+    { status: 500 }
+  );
+}
     const astroSummary = JSON.stringify(natalData, null, 2); 
 console.log("ASTRO DATA:", natalData);
     const westernSign = getWesternZodiacSign(birthDate);
