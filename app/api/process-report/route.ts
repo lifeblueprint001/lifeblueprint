@@ -189,6 +189,7 @@ export async function POST(req: Request) {
   lon: 16.4339,
   tzone: 1,
 });
+    const astroSummary = JSON.stringify(natalData, null, 2); 
 console.log("ASTRO DATA:", natalData);
     const westernSign = getWesternZodiacSign(birthDate);
     const chineseSign = getChineseZodiacSign(birthDate);
@@ -255,6 +256,13 @@ Date of birth: ${birthDate}
 Time of birth: ${birthTime}
 Place of birth: ${birthPlace}
 
+REAL ASTROLOGY API DATA:
+${astroSummary}
+
+IMPORTANT:
+Use this real astrology data as the primary source.
+If planets, signs, houses or aspects exist, use them.
+Do NOT ignore this data.
 CALCULATED SYMBOLIC DATA:
 Western Zodiac Sign: ${westernSign}
 Chinese Zodiac Sign: ${chineseSign}
@@ -324,6 +332,13 @@ Use this internal profile as source material:
 
 ${internalProfile}
 
+REAL ASTROLOGY API DATA:
+${astroSummary}
+
+IMPORTANT:
+Use real astrology data actively.
+Mention planets, signs, houses where relevant.
+Do not rely only on generic symbolic data.
 USER DATA:
 Full name: ${fullName}
 Date of birth: ${birthDate}
