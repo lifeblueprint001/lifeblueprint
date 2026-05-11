@@ -200,7 +200,51 @@ if (natalData?.errorType || natalData?.errorMessage) {
     { status: 500 }
   );
 }
-    const astroSummary = JSON.stringify(natalData, null, 2); 
+    const getPlanet = (name: string) =>
+  natalData.planets?.find((p: any) => p.name === name);
+
+const getHouse = (house: number) =>
+  natalData.houses?.find((h: any) => h.house === house);
+
+const sun = getPlanet("Sun");
+const moon = getPlanet("Moon");
+const mercury = getPlanet("Mercury");
+const venus = getPlanet("Venus");
+const mars = getPlanet("Mars");
+const jupiter = getPlanet("Jupiter");
+const saturn = getPlanet("Saturn");
+
+const ascendantHouse = getHouse(1);
+const midheavenHouse = getHouse(10);
+
+const astroSummary = `
+ASCENDANT:
+${ascendantHouse?.sign}
+
+SUN:
+${sun?.sign}, house ${sun?.house}
+
+MOON:
+${moon?.sign}, house ${moon?.house}
+
+MERCURY:
+${mercury?.sign}, house ${mercury?.house}
+
+VENUS:
+${venus?.sign}, house ${venus?.house}
+
+MARS:
+${mars?.sign}, house ${mars?.house}
+
+JUPITER:
+${jupiter?.sign}, house ${jupiter?.house}
+
+SATURN:
+${saturn?.sign}, house ${saturn?.house}
+
+MIDHEAVEN:
+${midheavenHouse?.sign}
+`;
 console.log("ASTRO DATA:", natalData);
     const westernSign = getWesternZodiacSign(birthDate);
     const chineseSign = getChineseZodiacSign(birthDate);
@@ -287,7 +331,9 @@ RULES:
 - Do NOT write a report.
 - Do NOT give advice.
 - Do NOT use generic horoscope language.
-- Do NOT invent ascendant, moon sign, houses, nakshatras, dashas, degrees or exact planetary placements.
+- Do NOT invent any astrology data.
+- Use only the Ascendant, planets, houses and aspects provided in REAL ASTROLOGY API DATA.
+- Do not add placements that are not present in the API data.
 - Use the symbolic data as psychological archetypes.
 - Every insight must describe behavior, not traits.
 
@@ -375,7 +421,9 @@ ABSOLUTE RULES:
 - Do NOT use phrases like "trebao bi", "pokušaj", "preporučujem", "razmotri", "bilo bi dobro".
 - Do NOT write in formal Croatian.
 - Use "ti", not "Vi".
-- Do NOT invent exact astrology placements.
+- Do NOT invent any astrology placements.
+- Use only astrology placements provided in REAL ASTROLOGY API DATA.
+- The real natal chart data is more important than generic Western sign / Chinese zodiac / numerology.
 - Do NOT over-explain systems.
 - Do NOT repeat the same pattern with different words.
 - Do NOT use generic phrases like:
@@ -400,6 +448,7 @@ Only at the end open the door toward transformation.
 
 CRITICAL SYNTHESIS RULE:
 Every major insight must connect at least 2 systems together.
+Every major insight must include at least one real natal chart placement from REAL ASTROLOGY API DATA.
 
 Use:
 - Western sign: ${westernSign}
@@ -434,9 +483,16 @@ The first paragraph must feel personal and specific.
 
 ## 2. Obrazac Koji Te Najviše Vodi
 
-Explain the dominant life pattern created by:
-- ${westernSign}
-- ${chineseSign}
+Explain the dominant life pattern created primarily by:
+- Ascendant from REAL ASTROLOGY API DATA
+- Sun sign and house from REAL ASTROLOGY API DATA
+- Moon sign and house from REAL ASTROLOGY API DATA
+- Mars sign and house from REAL ASTROLOGY API DATA
+- Venus sign and house from REAL ASTROLOGY API DATA
+- Saturn sign and house from REAL ASTROLOGY API DATA
+
+Then connect it with:
+- Chinese Zodiac: ${chineseSign}
 - Life Path ${lifePathNumber}
 - Expression ${expressionNumber}
 
