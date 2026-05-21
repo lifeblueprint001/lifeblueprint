@@ -2,6 +2,7 @@ import OpenAI from "openai";
 import { Resend } from "resend";
 import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
+import { westernEngine } from "@/lib/ai/westernEngine";
 
 function escapeHtml(text: string) {
   return text
@@ -247,6 +248,11 @@ ${midheavenHouse?.sign}
 `;
 console.log("ASTRO DATA:", natalData);
     const westernSign = getWesternZodiacSign(birthDate);
+    const westernAnalysis = await westernEngine({
+  openai,
+  astroSummary,
+  fullName,
+});
     const chineseSign = getChineseZodiacSign(birthDate);
     const lifePathNumber = calculateLifePathNumber(birthDate);
     const expressionNumber = calculateExpressionNumber(fullName);                                                                                                                       
@@ -290,388 +296,24 @@ console.log("ASTRO DATA:", natalData);
         { status: 500 }
       );
     }
-
-    if (existingReport) {
-      return Response.json({
-        success: true,
-        report: existingReport.report,
-        userResult: existingReport.email_sent ? { alreadySent: true } : null,
-        existing: true,
-      });
-    }
-
-const profilePrompt = `
-You are creating an internal psychological-symbolic profile.
-
-This profile is NOT shown to the user.
-
-USER DATA:
-Full name: ${fullName}
-Date of birth: ${birthDate}
-Time of birth: ${birthTime}
-Place of birth: ${birthPlace}
-
-REAL ASTROLOGY API DATA:
-${astroSummary}
-
-IMPORTANT:
-Use this real astrology data as the primary source.
-If planets, signs, houses or aspects exist, use them.
-Do NOT ignore this data.
-CALCULATED SYMBOLIC DATA:
-Western Zodiac Sign: ${westernSign}
-Chinese Zodiac Sign: ${chineseSign}
-Life Path Number: ${lifePathNumber}
-Expression / Destiny Number: ${expressionNumber}
-
-TASK:
-Create a sharp internal profile.
-
-RULES:
-- Do NOT write a report.
-- Do NOT give advice.
-- Do NOT use generic horoscope language.
-- Do NOT invent any astrology data.
-- Use only the Ascendant, planets, houses and aspects provided in REAL ASTROLOGY API DATA.
-- Do not add placements that are not present in the API data.
-- Use the symbolic data as psychological archetypes.
-- Every insight must describe behavior, not traits.
-
-Create:
-
-1. CORE LIFE TENSION
-One strong paragraph.
-
-2. 7 BEHAVIORAL PATTERNS
-Each pattern must include:
-- what the person does in real life
-- what triggers it
-- what they hide from others
-- what it costs them
-- which symbols reinforce it
-
-3. 5 UNCOMFORTABLE TRUTHS
-Sharp sentences that may feel too accurate.
-
-4. RELATIONSHIP LOOP
-Describe their repeated emotional pattern in love.
-
-5. CAREER LOOP
-Describe their repeated pattern with ambition, discipline, money and direction.
-
-6. SELF-SABOTAGE LOOP
-Describe how they delay, escape, overthink, restart or abandon things.
-
-7. TRANSFORMATION EDGE
-What life is forcing them to confront.
-
-Make it psychologically specific, emotionally sharp, and not motivational.
-`;
-
-   const profileResponse = await openai.chat.completions.create({
-  model: "gpt-4o-mini",
-  messages: [
-    {
-      role: "user",
-      content: profilePrompt,
-    },
-  ],
-  temperature: 0.9,
-});
-
-const internalProfile =
-  profileResponse.choices[0]?.message?.content || "";
-
- const reportPrompt = `
-You are writing a premium Life Blueprint report.
-
-Use this internal profile as source material:
-
-${internalProfile}
-
-REAL ASTROLOGY API DATA:
-${astroSummary}
-
-IMPORTANT:
-Use real astrology data actively.
-Mention planets, signs, houses where relevant.
-Do not rely only on generic symbolic data.
-USER DATA:
-Full name: ${fullName}
-Date of birth: ${birthDate}
-Time of birth: ${birthTime}
-Place of birth: ${birthPlace}
-
-CALCULATED SYMBOLIC DATA:
-Western Zodiac Sign: ${westernSign}
-Chinese Zodiac Sign: ${chineseSign}
-Life Path Number: ${lifePathNumber}
-Expression / Destiny Number: ${expressionNumber}
-
-LANGUAGE RULE:
-Write in Croatian if the birth place suggests Croatia, Serbia, Bosnia and Herzegovina, Montenegro, Slovenia, or nearby Balkan region.
-Otherwise write in English.
-Use only one language.
-In Croatian, use "ti", never "Vi".
-
-ABSOLUTE RULES:
-- Do NOT write abstract psychological descriptions.
-- Every insight must include a real-life behavior example.
-- Do NOT sound like a horoscope.
-- Do NOT sound like generic AI advice.
-- Do NOT give advice in the first 80% of the report.
-- Do NOT use phrases like "trebao bi", "pokušaj", "preporučujem", "razmotri", "bilo bi dobro".
-- Do NOT write in formal Croatian.
-- Use "ti", not "Vi".
-- Do NOT invent any astrology placements.
-- Use only astrology placements provided in REAL ASTROLOGY API DATA.
-- The real natal chart data is more important than generic Western sign / Chinese zodiac / numerology.
-- Do NOT over-explain systems.
-- Do NOT repeat the same pattern with different words.
-- Do NOT use generic phrases like:
-  "imaš veliki potencijal"
-  "jako si intuitivan"
-  "orijentiran si na detalje"
-  "tvoje putovanje je složeno"
-  "moraš vjerovati u sebe"
-
-CORE WRITING STYLE:
-Write like a direct private analysis.
-Sharp, intimate, grounded, psychologically precise.
-
-The text should feel like:
-"ovo me pogodilo"
-"ovo nisam očekivao"
-"ovo je neugodno točno"
-
-Do not motivate first.
-Expose first.
-Only at the end open the door toward transformation.
-
-CRITICAL STYLE OVERRIDE:
-
-Do NOT describe the person from the outside.
-
-Write as if you are recognizing patterns that are already happening.
-
-Every paragraph must feel like:
-- you have seen this behavior before
-- you are naming something they already do
-- you are exposing a pattern they cannot deny
-
-Avoid phrases like:
-"ti imaš tendenciju"
-"ti često"
-"ti možeš"
-
-Instead use:
-"ti to radiš kada..."
-"to se događa kad..."
-"tu se uvijek povlačiš"
-"tu prekidaš prije nego postane stvarno"
-
-Make it feel like observation, not explanation.
-
-CRITICAL SYNTHESIS RULE:
-Every major insight must connect at least 2 systems together.
-Every major insight must include at least one real natal chart placement from REAL ASTROLOGY API DATA.
-
-Use:
-- Western sign: ${westernSign}
-- Chinese Zodiac: ${chineseSign}
-- Life Path: ${lifePathNumber}
-- Expression Number: ${expressionNumber}
-- Jyotish only as symbolic karmic/introspective layer
-
-Do NOT describe systems separately for too long.
-Merge them into behavior.
-
-EXAMPLE STYLE:
-Not:
-"Kao Djevica, ti si organiziran."
-
-Better:
-"${westernSign} ti daje potrebu da stvari imaju smisao prije nego kreneš, dok Life Path ${lifePathNumber} u tebi stalno otvara nemir prema novom. Zato često izgleda kao da znaš što radiš, ali iznutra istovremeno tražiš izlaz iz vlastitog plana."
-
-REPORT STRUCTURE:
-
-# Tvoj Životni Blueprint
-
-## 1. Prva Istina
-
-Start with a concrete real-life pattern.
-
-The first paragraph MUST:
-
-- describe a situation that actually happens in their life
-- describe what they do in that situation
-- describe what they feel internally
-- show the contradiction between what they want and what they do
-
-Write it like you are recognizing something they already live through.
-
-Do NOT explain.
-Do NOT analyze from distance.
-
-Write like:
-
-"Kreneš u nešto s jasnom namjerom, ali čim osjetiš da više nemaš kontrolu nad ishodom, počneš usporavati..."
-
-or
-
-"Kad se stvari počnu razvijati u smjeru koji si želio, tada počinješ tražiti razloge zašto to nije dobra ideja..."
-
-Avoid:
-- abstract statements
-- general personality descriptions
-
-Make it feel like:
-"ovo mi se već dogodilo"
-
-## 2. Obrazac Koji Te Najviše Vodi
-
-Explain the dominant life pattern created primarily by:
-- Ascendant from REAL ASTROLOGY API DATA
-- Sun sign and house from REAL ASTROLOGY API DATA
-- Moon sign and house from REAL ASTROLOGY API DATA
-- Mars sign and house from REAL ASTROLOGY API DATA
-- Venus sign and house from REAL ASTROLOGY API DATA
-- Saturn sign and house from REAL ASTROLOGY API DATA
-
-Then connect it with:
-- Chinese Zodiac: ${chineseSign}
-- Life Path ${lifePathNumber}
-- Expression ${expressionNumber}
-
-Make it one connected psychological explanation.
-
-## 3. Tvoj Glavni Unutarnji Rascjep
-
-Describe the contradiction they live with.
-
-Use real-life behaviors:
-- how they start things
-- how they withdraw
-- how they overthink
-- what they show others
-- what they hide
-- where they sabotage momentum
-
-## 4. Četiri Obrasca Koja Se Stalno Ponavljaju
-
-Create exactly 4 patterns.
-
-Each pattern must have:
-
-### Pattern name
-
-Then write:
-- what this looks like in daily life
-- why people misunderstand it
-- how it affects love
-- how it affects work
-- what it costs them internally
-- which 2 or more systems point to the pattern
-
-Make each pattern distinct.
-
-## 5. Ono Što Ne Govoriš Naglas
-
-This section must be intimate.
-
-Describe:
-- what they do not admit easily
-- what hurts more than they show
-- what drains them
-- what they pretend does not matter
-- what they secretly need but rarely ask for
-
-Include at least 5 sentences that feel slightly uncomfortable but true.
-
-## 6. Ljubav: Tvoj Emocionalni Kod
-
-Describe:
-- how they attach
-- what they attract
-- what they test in others
-- when they pull away
-- what kind of person sees through their defenses
-- what relationship loop keeps repeating
-
-No generic relationship advice.
-
-## 7. Karijera, Novac i Smjer
-
-Describe:
-- how ambition works in them
-- why they can start intensely and then stall
-- what kind of work kills their energy
-- what kind of work activates them
-- how they relate to money, security and freedom
-- where they underestimate themselves
-
-Make it concrete.
-
-## 8. Tvoje Skrivene Snage
-
-Do not list obvious strengths.
-Describe strengths that came from pressure, contradiction, observation, survival, sensitivity or discipline.
-
-## 9. Tvoje Slijepe Točke
-
-Be honest.
-
-Describe:
-- what they delay
-- what they rationalize
-- where they confuse thinking with progress
-- where they choose control instead of growth
-- where they already know the truth but wait too long to act
-
-## 10. Sljedeća Faza
-
-Now, and only now, shift toward transformation.
-
-Use this structure:
-
-Ako nastaviš po starom obrascu...
-Ako postaneš svjestan tog obrasca...
-Sljedeća faza od tebe traži...
-
-Do not make fixed predictions.
-Make it serious and grounded.
-
-## 11. Konačna Poruka
-
-End with a strong final message.
-No clichés.
-No generic motivation.
-It should feel like a personal closing truth.
-
-LENGTH:
-Minimum 2200 words.
-Maximum 3500 words.
-
-QUALITY BAR:
-This must feel like a paid premium product.
-It must be sharper, deeper and more personal than a free AI horoscope.
-The user should feel exposed, understood and emotionally hit.
-`;
-
-    const reportResponse = await openai.chat.completions.create({
-  model: "gpt-4o-mini",
-  messages: [
-    {
-      role: "user",
-      content: reportPrompt,
-    },
-  ],
-  temperature: 0.85,
-});
-
-const report =
-  reportResponse.choices[0]?.message?.content || "No report generated.";
-
+// TEMPORARILY DISABLED DUPLICATE CHECK
+
+/*
+if (existingReport) {
+  return Response.json({
+    success: true,
+    report: existingReport.report,
+    userResult: existingReport.email_sent ? { alreadySent: true } : null,
+    existing: true,
+  });
+}
+*/
+
+   const report = JSON.stringify(
+  JSON.parse(westernAnalysis),
+  null,
+  2
+);
     const safeReport = escapeHtml(report);
 
     const { error: insertError } = await supabase.from("reports").insert({
