@@ -3,6 +3,7 @@ import { Resend } from "resend";
 import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
 import { westernEngine } from "@/lib/ai/westernEngine";
+import { numerologyEngine } from "@/lib/ai/numerologyEngine";
 
 function escapeHtml(text: string) {
   return text
@@ -253,10 +254,16 @@ console.log("ASTRO DATA:", natalData);
   astroSummary,
   fullName,
 });
+  
     const chineseSign = getChineseZodiacSign(birthDate);
     const lifePathNumber = calculateLifePathNumber(birthDate);
     const expressionNumber = calculateExpressionNumber(fullName);                                                                                                                       
-
+    const numerologyAnalysis = await numerologyEngine({
+  openai,
+  fullName,
+  lifePathNumber,
+  expressionNumber,
+});
 
     if (
       !fullName ||
@@ -309,8 +316,11 @@ if (existingReport) {
 }
 */
 
-   const report = JSON.stringify(
-  JSON.parse(westernAnalysis),
+const report = JSON.stringify(
+  {
+    western: JSON.parse(westernAnalysis),
+    numerology: JSON.parse(numerologyAnalysis),
+  },
   null,
   2
 );
