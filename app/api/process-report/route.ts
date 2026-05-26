@@ -4,6 +4,8 @@ import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
 import { westernEngine } from "@/lib/ai/westernEngine";
 import { numerologyEngine } from "@/lib/ai/numerologyEngine";
+import { jyotishEngine } from "@/lib/ai/jyotishEngine";
+import { chineseEngine } from "@/lib/ai/chineseEngine";
 
 function escapeHtml(text: string) {
   return text
@@ -256,6 +258,11 @@ console.log("ASTRO DATA:", natalData);
 });
   
     const chineseSign = getChineseZodiacSign(birthDate);
+    const chineseAnalysis = await chineseEngine({
+  openai,
+  fullName,
+  chineseSign,
+});
     const lifePathNumber = calculateLifePathNumber(birthDate);
     const expressionNumber = calculateExpressionNumber(fullName);                                                                                                                       
     const numerologyAnalysis = await numerologyEngine({
@@ -263,6 +270,13 @@ console.log("ASTRO DATA:", natalData);
   fullName,
   lifePathNumber,
   expressionNumber,
+});
+    const jyotishAnalysis = await jyotishEngine({
+  openai,
+  fullName,
+  birthDate,
+  birthTime,
+  birthPlace,
 });
 
     if (
@@ -320,6 +334,8 @@ const report = JSON.stringify(
   {
     western: JSON.parse(westernAnalysis),
     numerology: JSON.parse(numerologyAnalysis),
+    jyotish: JSON.parse(jyotishAnalysis),
+    chinese: JSON.parse(chineseAnalysis),
   },
   null,
   2
