@@ -6,6 +6,7 @@ import { westernEngine } from "@/lib/ai/westernEngine";
 import { numerologyEngine } from "@/lib/ai/numerologyEngine";
 import { jyotishEngine } from "@/lib/ai/jyotishEngine";
 import { chineseEngine } from "@/lib/ai/chineseEngine";
+import { synthesisEngine } from "@/lib/ai/synthesisEngine";
 
 function escapeHtml(text: string) {
   return text
@@ -278,6 +279,18 @@ console.log("ASTRO DATA:", natalData);
   birthTime,
   birthPlace,
 });
+const westernParsed = JSON.parse(westernAnalysis);
+const numerologyParsed = JSON.parse(numerologyAnalysis);
+const jyotishParsed = JSON.parse(jyotishAnalysis);
+const chineseParsed = JSON.parse(chineseAnalysis);
+
+const synthesisAnalysis = await synthesisEngine({
+  openai,
+  western: westernParsed,
+  numerology: numerologyParsed,
+  jyotish: jyotishParsed,
+  chinese: chineseParsed,
+});
 
     if (
       !fullName ||
@@ -332,10 +345,11 @@ if (existingReport) {
 
 const report = JSON.stringify(
   {
-    western: JSON.parse(westernAnalysis),
-    numerology: JSON.parse(numerologyAnalysis),
-    jyotish: JSON.parse(jyotishAnalysis),
-    chinese: JSON.parse(chineseAnalysis),
+    western: westernParsed,
+    numerology: numerologyParsed,
+    jyotish: jyotishParsed,
+    chinese: chineseParsed,
+    synthesis: JSON.parse(synthesisAnalysis),
   },
   null,
   2
