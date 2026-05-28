@@ -7,6 +7,7 @@ import { numerologyEngine } from "@/lib/ai/numerologyEngine";
 import { jyotishEngine } from "@/lib/ai/jyotishEngine";
 import { chineseEngine } from "@/lib/ai/chineseEngine";
 import { synthesisEngine } from "@/lib/ai/synthesisEngine";
+import { finalComposer } from "@/lib/ai/finalComposer";
 
 function escapeHtml(text: string) {
   return text
@@ -343,17 +344,23 @@ if (existingReport) {
 }
 */
 
-const report = JSON.stringify(
-  {
-    western: westernParsed,
-    numerology: numerologyParsed,
-    jyotish: jyotishParsed,
-    chinese: chineseParsed,
-    synthesis: JSON.parse(synthesisAnalysis),
-  },
-  null,
-  2
-);
+const synthesisParsed = JSON.parse(synthesisAnalysis);
+
+const report = await finalComposer({
+  openai,
+
+  fullName,
+  birthDate,
+  birthTime,
+  birthPlace,
+
+  western: westernParsed,
+  numerology: numerologyParsed,
+  jyotish: jyotishParsed,
+  chinese: chineseParsed,
+  synthesis: synthesisParsed,
+});
+
     const safeReport = escapeHtml(report);
 
     const { error: insertError } = await supabase.from("reports").insert({
