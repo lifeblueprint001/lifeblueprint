@@ -103,7 +103,19 @@ Birth place:
 
 Explain briefly that this is a multi-system behavioral analysis, not fortune telling.
 
-## 2. Zapadna astrologija: tvoja osnovna psihološka mapa
+## 2. Tvoja karta i simbolički kod
+
+Show the user the key input layers in a clean way:
+- key western astrology placements
+- numerology numbers
+- Jyotish-style life direction
+- Chinese zodiac sign
+
+Explain briefly what each layer contributes.
+Do not go too technical.
+This section should build trust and show that the report is based on actual symbolic data.
+
+## 3. Zapadna astrologija: tvoja osnovna psihološka mapa
 
 Explain the western astrology layer through real behavior:
 - identity
@@ -114,7 +126,7 @@ Explain the western astrology layer through real behavior:
 - conflict
 - hidden strength
 
-## 3. Numerologija: tvoj unutarnji pogon
+## 4. Numerologija: tvoj unutarnji pogon
 
 Explain:
 - life path
@@ -125,7 +137,7 @@ Explain:
 - discipline
 - hidden challenge
 
-## 4. Đotiš smjer: dublji životni obrazac
+## 5. Đotiš smjer: dublji životni obrazac
 
 Explain:
 - life direction
@@ -136,7 +148,7 @@ Explain:
 - present challenge
 - future direction without prediction
 
-## 5. Kineski horoskop: instinkt i ponašanje među ljudima
+## 6. Kineski horoskop: instinkt i ponašanje među ljudima
 
 Explain:
 - instinctive style
@@ -146,27 +158,59 @@ Explain:
 - social strengths
 - shadow pattern
 
-## 6. Glavna sinteza: obrazac koji se ponavlja kroz tvoj život
+## 7. Glavna sinteza: obrazac koji se ponavlja kroz tvoj život
 
 This is the most important section.
 Use synthesis strongly.
-Explain:
+
+Must include:
 - core pattern
 - main contradiction
+- life mechanism
+- repeating loop
 - present tension
 - emotional defense
 - self-sabotage
 - hidden strength
 
-## 7. Odnosi i bliskost
+## 8. Stvari koje ćeš vjerojatno prepoznati kod sebe
+
+Use synthesis.recognitionMoments.
+
+Write 10-15 short, sharp recognition moments.
+
+These must feel like:
+"How does it know that?"
+
+Rules:
+- concrete
+- direct
+- realistic
+- no spiritual language
+- no generic self-help
+- each point should describe a small real-life behavior
+
+## 9. Tvoje skrivene kontradikcije
+
+Use synthesis.hiddenContradictions.
+
+Explain the contradictions between:
+- what the person wants
+- what the person actually does
+- what creates tension
+- what repeats in life
+
+Make this section honest but not cruel.
+
+## 10. Odnosi i bliskost
 
 Explain relationship dynamic in concrete real-life behavior.
 
-## 8. Posao, novac i smjer
+## 11. Posao, novac i smjer
 
 Explain work pattern, ambition, discipline, money/security behavior, and potential.
 
-## 9. Prošlost, sadašnjost i mogući smjer
+## 12. Prošlost, sadašnjost i mogući smjer
 
 Do NOT predict events.
 Explain:
@@ -174,7 +218,7 @@ Explain:
 - what is active now
 - what direction opens if patterns shift
 
-## 10. Završna poruka
+## 13. Završna poruka
 
 End grounded, human, powerful.
 No generic inspiration.
@@ -195,6 +239,14 @@ Make the person feel multidimensional:
 - creativity
 - discipline
 - emotional style
+The strongest parts of the report must be:
+- recognition moments
+- hidden contradictions
+- life mechanism
+- repeating loop
+
+The user should feel:
+"This report explains how I function, not just what I am."
 
 Minimum 2200 words.
 Now write the complete final report.

@@ -51,15 +51,19 @@ GOALS
 
 Find:
 
-1. Repeating emotional patterns
-2. Core behavioral contradictions
-3. Relationship dynamics
-4. Work and ambition patterns
-5. Self-sabotage tendencies
-6. Hidden strengths
-7. Emotional defense mechanisms
-8. Present life tension
-9. Future behavioral direction
+1. Core life pattern
+2. Main contradiction
+3. Life mechanism
+4. Repeating loop
+5. Recognition moments
+6. Hidden contradictions
+7. Relationship dynamic
+8. Work pattern
+9. Self-sabotage pattern
+10. Hidden strength
+11. Emotional defense
+12. Present tension
+13. Future direction
 
 ==================================================
 VERY IMPORTANT
@@ -89,6 +93,20 @@ Return ONLY this JSON structure:
 {
   "corePattern": "",
   "mainContradiction": "",
+  "lifeMechanism": "",
+  "repeatingLoop": "",
+  "recognitionMoments": [
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "hiddenContradictions": [
+    "",
+    "",
+    ""
+  ],
   "relationshipDynamic": "",
   "workPattern": "",
   "selfSabotagePattern": "",
@@ -110,6 +128,27 @@ Each field:
 - behavioral
 - emotionally intelligent
 - grounded in real life
+
+RECOGNITION MOMENTS:
+
+These are the most important outputs.
+
+Each recognition moment should feel like:
+
+"How does it know that?"
+
+Examples:
+
+- When you lose trust in someone, you rarely react immediately. You slowly reduce emotional investment first.
+
+- You often make a decision internally long before you tell anyone about it.
+
+- People often see your calm behavior but do not see how much mental processing is happening underneath.
+
+Avoid generic statements.
+
+Make them specific and realistic.
+
 
 Return ONLY JSON.
 `;
