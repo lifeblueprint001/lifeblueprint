@@ -52,11 +52,16 @@ ${JSON.stringify(synthesis, null, 2)}
 LANGUAGE RULE
 ==================================================
 
-Write in Croatian if the birth place suggests Croatia, Serbia, Bosnia and Herzegovina, Montenegro, Slovenia, North Macedonia or nearby Balkan region.
-Otherwise write in English.
+Write the final report in Croatian if the birth place suggests Croatia, Serbia, Bosnia and Herzegovina, Montenegro, Slovenia, North Macedonia or nearby Balkan region.
+Otherwise write the final report in English.
 
-Use only one language.
-In Croatian, use "ti", never "Vi".
+Use only one language in the final report.
+
+If writing in Croatian:
+- use "ti"
+- never use "Vi"
+- avoid Serbian forms such as "raport", "porodica", "osjećanja"
+- prefer Croatian forms such as "izvještaj", "obitelj", "osjećaji"
 
 ==================================================
 STYLE
@@ -86,10 +91,30 @@ Do not predict exact future events.
 Use future direction only as pattern-based guidance.
 
 ==================================================
+CORE PRODUCT GOAL
+==================================================
+
+The user should not only think:
+"This is interesting."
+
+The user should think:
+"This explains how I function."
+
+The strongest parts of the report must be:
+- recognition moments
+- micro behaviors
+- hidden contradictions
+- life mechanism
+- decision loop
+- public self vs private self
+
+Focus on small real-life behaviors, not only broad personality descriptions.
+
+==================================================
 REPORT STRUCTURE
 ==================================================
 
-Use this exact structure:
+Use this exact structure in the final report language:
 
 # LIFE BLUEPRINT
 ## Personal Life Pattern Analysis
@@ -99,11 +124,11 @@ Birth date:
 Birth time:
 Birth place:
 
-## 1. Kako čitati ovaj report
+## 1. How to Read This Report
 
 Explain briefly that this is a multi-system behavioral analysis, not fortune telling.
 
-## 2. Tvoja karta i simbolički kod
+## 2. Your Chart and Symbolic Code
 
 Show the user the key input layers in a clean way:
 - key western astrology placements
@@ -115,7 +140,7 @@ Explain briefly what each layer contributes.
 Do not go too technical.
 This section should build trust and show that the report is based on actual symbolic data.
 
-## 3. Zapadna astrologija: tvoja osnovna psihološka mapa
+## 3. Western Astrology: Your Core Psychological Map
 
 Explain the western astrology layer through real behavior:
 - identity
@@ -126,7 +151,10 @@ Explain the western astrology layer through real behavior:
 - conflict
 - hidden strength
 
-## 4. Numerologija: tvoj unutarnji pogon
+Mention relevant placements when useful.
+Always connect placements to real-life behavior.
+
+## 4. Numerology: Your Inner Drive
 
 Explain:
 - life path
@@ -137,7 +165,7 @@ Explain:
 - discipline
 - hidden challenge
 
-## 5. Đotiš smjer: dublji životni obrazac
+## 5. Jyotish Direction: The Deeper Life Pattern
 
 Explain:
 - life direction
@@ -148,7 +176,7 @@ Explain:
 - present challenge
 - future direction without prediction
 
-## 6. Kineski horoskop: instinkt i ponašanje među ljudima
+## 6. Chinese Zodiac: Instinct and Social Behavior
 
 Explain:
 - instinctive style
@@ -158,9 +186,9 @@ Explain:
 - social strengths
 - shadow pattern
 
-## 7. Glavna sinteza: obrazac koji se ponavlja kroz tvoj život
+## 7. Main Synthesis: The Pattern Repeating Through Your Life
 
-This is the most important section.
+This is one of the most important sections.
 Use synthesis strongly.
 
 Must include:
@@ -173,7 +201,7 @@ Must include:
 - self-sabotage
 - hidden strength
 
-## 8. Stvari koje ćeš vjerojatno prepoznati kod sebe
+## 8. Recognition Moments
 
 Use synthesis.recognitionMoments.
 
@@ -190,7 +218,57 @@ Rules:
 - no generic self-help
 - each point should describe a small real-life behavior
 
-## 9. Tvoje skrivene kontradikcije
+## 9. Micro Behaviors People Around You Rarely Notice
+
+Use synthesis.microBehaviors.
+
+Write them as short observations.
+
+Each observation should feel:
+"That is exactly what I do."
+
+Do not over-explain.
+Do not turn them into therapy advice.
+Describe observable behavior.
+
+## 10. Relationship Triggers
+
+Use synthesis.relationshipTriggers.
+
+Explain:
+- what causes emotional reactions
+- what breaks trust
+- what creates distance
+- what creates connection
+
+Use real-life examples.
+
+## 11. How You Actually Make Decisions
+
+Use synthesis.decisionLoop.
+
+Show the actual sequence.
+
+Example format:
+Idea → Research → Optimism → Risk detection → Delay → Decision
+
+Explain how this pattern repeats through life.
+
+## 12. Public Self vs Private Self
+
+Use synthesis.privateVsPublicSelf.
+
+Create two subsections:
+
+### Public Self
+
+### Private Self
+
+The contrast should feel surprisingly accurate.
+
+Show how the person appears externally versus how they actually experience situations internally.
+
+## 13. Hidden Contradictions
 
 Use synthesis.hiddenContradictions.
 
@@ -202,15 +280,15 @@ Explain the contradictions between:
 
 Make this section honest but not cruel.
 
-## 10. Odnosi i bliskost
+## 14. Relationships and Emotional Closeness
 
 Explain relationship dynamic in concrete real-life behavior.
 
-## 11. Posao, novac i smjer
+## 15. Work, Money and Direction
 
 Explain work pattern, ambition, discipline, money/security behavior, and potential.
 
-## 12. Prošlost, sadašnjost i mogući smjer
+## 16. Past, Present and Possible Direction
 
 Do NOT predict events.
 Explain:
@@ -218,7 +296,7 @@ Explain:
 - what is active now
 - what direction opens if patterns shift
 
-## 13. Završna poruka
+## 17. Final Message
 
 End grounded, human, powerful.
 No generic inspiration.
@@ -228,8 +306,15 @@ QUALITY RULES
 ==================================================
 
 Every section must include real-life behavior examples.
+
 Do not repeat the same idea too many times.
-Do not overfocus only on fear, vulnerability or emotional withdrawal.
+
+Do not overfocus only on:
+- fear
+- vulnerability
+- emotional withdrawal
+- overthinking
+
 Make the person feel multidimensional:
 - work
 - love
@@ -239,16 +324,16 @@ Make the person feel multidimensional:
 - creativity
 - discipline
 - emotional style
-The strongest parts of the report must be:
-- recognition moments
-- hidden contradictions
-- life mechanism
-- repeating loop
+- public behavior
+- private inner process
 
-The user should feel:
-"This report explains how I function, not just what I am."
+The user should repeatedly think:
+"That is exactly what I do."
 
-Minimum 2200 words.
+Avoid generic personality descriptions.
+
+Minimum 2600 words.
+
 Now write the complete final report.
 `;
 

@@ -102,11 +102,26 @@ Return ONLY this JSON structure:
     "",
     ""
   ],
+  "microBehaviors": [
+    "",
+    "",
+    "",
+    "",
+    ""
+  ],
+  "relationshipTriggers": [
+    "",
+    "",
+    "",
+    ""
+  ],
   "hiddenContradictions": [
     "",
     "",
     ""
   ],
+  "decisionLoop": "",
+  "privateVsPublicSelf": "",
   "relationshipDynamic": "",
   "workPattern": "",
   "selfSabotagePattern": "",
@@ -128,6 +143,32 @@ Each field:
 - behavioral
 - emotionally intelligent
 - grounded in real life
+
+MICRO BEHAVIORS:
+
+These are extremely specific small real-life behaviors.
+
+Examples:
+
+- Makes important decisions internally before talking about them.
+- Replays conversations after they are over.
+- Notices changes in tone before changes in words.
+- Often researches before asking for help.
+- May appear calm while internally evaluating multiple scenarios.
+
+Avoid generic personality descriptions.
+
+Describe observable behavior.
+
+PRIVATE VS PUBLIC SELF
+
+Describe:
+
+How the person appears externally.
+
+How the person actually experiences situations internally.
+
+The contrast should feel surprisingly accurate.
 
 RECOGNITION MOMENTS:
 
