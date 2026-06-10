@@ -7,7 +7,7 @@ import { numerologyEngine } from "@/lib/ai/numerologyEngine";
 import { jyotishEngine } from "@/lib/ai/jyotishEngine";
 import { chineseEngine } from "@/lib/ai/chineseEngine";
 import { synthesisEngine } from "@/lib/ai/synthesisEngine";
-import { finalComposer } from "@/lib/ai/finalComposer";
+import { finalComposer } from "@/lib/ai/finalComposerV2";
 
 function escapeHtml(text: string) {
   return text
