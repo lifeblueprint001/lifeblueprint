@@ -2,6 +2,7 @@ import OpenAI from "openai";
 import { Resend } from "resend";
 import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
+
 import { westernEngine } from "@/lib/ai/westernEngine";
 import { numerologyEngine } from "@/lib/ai/numerologyEngine";
 import { jyotishEngine } from "@/lib/ai/jyotishEngine";
@@ -17,6 +18,7 @@ function escapeHtml(text: string) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
+
 function getWesternZodiacSign(birthDate: string) {
   const date = new Date(birthDate);
   const day = date.getUTCDate();
@@ -102,6 +104,7 @@ function calculateExpressionNumber(fullName: string) {
 
   return reduceToCoreNumber(total);
 }
+
 async function getNatalChartData({
   birthDate,
   birthTime,
@@ -118,29 +121,26 @@ async function getNatalChartData({
   const [year, month, day] = birthDate.split("-").map(Number);
   const [hour, min] = birthTime.split(":").map(Number);
 
-  const response = await fetch(
-    "https://json.astrologyapi.com/v1/western_horoscope",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept-Language": "en",
-        "x-astrologyapi-key": process.env.ASTROLOGY_API_KEY!,
-      },
-      body: JSON.stringify({
-        day,
-        month,
-        year,
-        hour,
-        min,
-        lat,
-        lon,
-        tzone,
-        house_type: "placidus",
-        is_asteroids: "false",
-      }),
-    }
-  );
+  const response = await fetch("https://json.astrologyapi.com/v1/western_horoscope", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept-Language": "en",
+      "x-astrologyapi-key": process.env.ASTROLOGY_API_KEY!,
+    },
+    body: JSON.stringify({
+      day,
+      month,
+      year,
+      hour,
+      min,
+      lat,
+      lon,
+      tzone,
+      house_type: "placidus",
+      is_asteroids: "false",
+    }),
+  });
 
   if (!response.ok) {
     throw new Error("Astrology API error");
@@ -148,6 +148,7 @@ async function getNatalChartData({
 
   return await response.json();
 }
+
 export async function POST(req: Request) {
   try {
     const openaiApiKey = process.env.OPENAI_API_KEY;
@@ -164,18 +165,10 @@ export async function POST(req: Request) {
       !supabaseKey
     ) {
       return Response.json(
-        { error: "Missing server environment variables" },
+        { success: false, error: "Missing server environment variables" },
         { status: 500 }
       );
     }
-
-    const openai = new OpenAI({
-      apiKey: openaiApiKey,
-    });
-
-    const resend = new Resend(resendApiKey);
-    const stripe = new Stripe(stripeSecretKey);
-    const supabase = createClient(supabaseUrl, supabaseKey);
 
     const body = await req.json();
 
@@ -188,42 +181,106 @@ export async function POST(req: Request) {
       sessionId,
     } = body;
 
+    if (
+      !fullName ||
+      !email ||
+      !birthDate ||
+      !birthTime ||
+      !birthPlace ||
+      !sessionId
+    ) {
+      return Response.json(
+        { success: false, error: "Missing required fields" },
+        { status: 400 }
+      );
+    }
+
+    const openai = new OpenAI({ apiKey: openaiApiKey });
+    const resend = new Resend(resendApiKey);
+    const stripe = new Stripe(stripeSecretKey);
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    // 1. PAYMENT GATE FIRST
+    const session = await stripe.checkout.sessions.retrieve(sessionId);
+
+    if (session.payment_status !== "paid") {
+      return Response.json(
+        { success: false, error: "Payment not completed" },
+        { status: 403 }
+      );
+    }
+
+    // 2. DUPLICATE CHECK BEFORE ANY AI/API COST
+    const { data: existingReport, error: existingReportError } = await supabase
+      .from("reports")
+      .select("*")
+      .eq("stripe_session_id", sessionId)
+      .maybeSingle();
+
+    if (existingReportError) {
+      console.error("Supabase existing report check error:", existingReportError);
+
+      return Response.json(
+        { success: false, error: "Failed to check existing report" },
+        { status: 500 }
+      );
+    }
+
+    if (existingReport) {
+      return Response.json({
+        success: true,
+        report: existingReport.report,
+        userResult: existingReport.email_sent ? { alreadySent: true } : null,
+        existing: true,
+      });
+    }
+
+    // 3. SYMBOLIC DATA
+    const westernSign = getWesternZodiacSign(birthDate);
+    const chineseSign = getChineseZodiacSign(birthDate);
+    const lifePathNumber = calculateLifePathNumber(birthDate);
+    const expressionNumber = calculateExpressionNumber(fullName);
+
+    // 4. ASTROLOGY API AFTER PAYMENT + DUPLICATE CHECK
     const natalData = await getNatalChartData({
-  birthDate,
-  birthTime,
-  lat: 46.3844,
-  lon: 16.4339,
-  tzone: 1,
-});
-if (natalData?.errorType || natalData?.errorMessage) {
-  console.error("ASTROLOGY API FAILED:", natalData);
+      birthDate,
+      birthTime,
+      lat: 46.3844,
+      lon: 16.4339,
+      tzone: 1,
+    });
 
-  return Response.json(
-    {
-      error: "Astrology API failed",
-      details: natalData,
-    },
-    { status: 500 }
-  );
-}
+    if (natalData?.errorType || natalData?.errorMessage) {
+      console.error("ASTROLOGY API FAILED:", natalData);
+
+      return Response.json(
+        {
+          success: false,
+          error: "Astrology API failed",
+          details: natalData,
+        },
+        { status: 500 }
+      );
+    }
+
     const getPlanet = (name: string) =>
-  natalData.planets?.find((p: any) => p.name === name);
+      natalData.planets?.find((p: any) => p.name === name);
 
-const getHouse = (house: number) =>
-  natalData.houses?.find((h: any) => h.house === house);
+    const getHouse = (house: number) =>
+      natalData.houses?.find((h: any) => h.house === house);
 
-const sun = getPlanet("Sun");
-const moon = getPlanet("Moon");
-const mercury = getPlanet("Mercury");
-const venus = getPlanet("Venus");
-const mars = getPlanet("Mars");
-const jupiter = getPlanet("Jupiter");
-const saturn = getPlanet("Saturn");
+    const sun = getPlanet("Sun");
+    const moon = getPlanet("Moon");
+    const mercury = getPlanet("Mercury");
+    const venus = getPlanet("Venus");
+    const mars = getPlanet("Mars");
+    const jupiter = getPlanet("Jupiter");
+    const saturn = getPlanet("Saturn");
 
-const ascendantHouse = getHouse(1);
-const midheavenHouse = getHouse(10);
+    const ascendantHouse = getHouse(1);
+    const midheavenHouse = getHouse(10);
 
-const astroSummary = `
+    const astroSummary = `
 ASCENDANT:
 ${ascendantHouse?.sign}
 
@@ -251,118 +308,82 @@ ${saturn?.sign}, house ${saturn?.house}
 MIDHEAVEN:
 ${midheavenHouse?.sign}
 `;
-console.log("ASTRO DATA:", natalData);
-    const westernSign = getWesternZodiacSign(birthDate);
+
+    console.log("ASTRO DATA:", natalData);
+
+    // 5. AI ENGINES
     const westernAnalysis = await westernEngine({
-  openai,
-  astroSummary,
-  fullName,
-});
-  
-    const chineseSign = getChineseZodiacSign(birthDate);
-    const chineseAnalysis = await chineseEngine({
-  openai,
-  fullName,
-  chineseSign,
-});
-    const lifePathNumber = calculateLifePathNumber(birthDate);
-    const expressionNumber = calculateExpressionNumber(fullName);                                                                                                                       
+      openai,
+      astroSummary,
+      fullName,
+    });
+
     const numerologyAnalysis = await numerologyEngine({
-  openai,
-  fullName,
-  lifePathNumber,
-  expressionNumber,
-});
+      openai,
+      fullName,
+      lifePathNumber,
+      expressionNumber,
+    });
+
     const jyotishAnalysis = await jyotishEngine({
-  openai,
-  fullName,
-  birthDate,
-  birthTime,
-  birthPlace,
-});
-const westernParsed = JSON.parse(westernAnalysis);
-const numerologyParsed = JSON.parse(numerologyAnalysis);
-const jyotishParsed = JSON.parse(jyotishAnalysis);
-const chineseParsed = JSON.parse(chineseAnalysis);
+      openai,
+      fullName,
+      birthDate,
+      birthTime,
+      birthPlace,
+    });
 
-const synthesisAnalysis = await synthesisEngine({
-  openai,
-  western: westernParsed,
-  numerology: numerologyParsed,
-  jyotish: jyotishParsed,
-  chinese: chineseParsed,
-});
+    const chineseAnalysis = await chineseEngine({
+      openai,
+      fullName,
+      chineseSign,
+    });
 
-    if (
-      !fullName ||
-      !email ||
-      !birthDate ||
-      !birthTime ||
-      !birthPlace ||
-      !sessionId
-    ) {
-      return Response.json(
-        { error: "Missing required fields" },
-        { status: 400 }
-      );
-    }
+    const westernParsed = JSON.parse(westernAnalysis);
+    const numerologyParsed = JSON.parse(numerologyAnalysis);
+    const jyotishParsed = JSON.parse(jyotishAnalysis);
+    const chineseParsed = JSON.parse(chineseAnalysis);
 
-    const session = await stripe.checkout.sessions.retrieve(sessionId);
+    const synthesisAnalysis = await synthesisEngine({
+      openai,
+      western: westernParsed,
+      numerology: numerologyParsed,
+      jyotish: jyotishParsed,
+      chinese: chineseParsed,
+    });
 
-    if (session.payment_status !== "paid") {
-      return Response.json(
-        { error: "Payment not completed" },
-        { status: 403 }
-      );
-    }
+    const synthesisParsed = JSON.parse(synthesisAnalysis);
 
-    // Anti-duplicate check:
-    // If this Stripe session already has a report, return it instead of generating again.
-    const { data: existingReport, error: existingReportError } = await supabase
-      .from("reports")
-      .select("*")
-      .eq("stripe_session_id", sessionId)
-      .maybeSingle();
+    // TEST ONLY WESTERN V3:
+    // If you want to test only western output, uncomment this block
+    // and comment out finalComposer report below.
+    /*
+    const report = JSON.stringify(
+      {
+        western: westernParsed,
+      },
+      null,
+      2
+    );
+    */
 
-    if (existingReportError) {
-      console.error("Supabase existing report check error:", existingReportError);
-      return Response.json(
-        { error: "Failed to check existing report" },
-        { status: 500 }
-      );
-    }
-// TEMPORARILY DISABLED DUPLICATE CHECK
-
-/*
-if (existingReport) {
-  return Response.json({
-    success: true,
-    report: existingReport.report,
-    userResult: existingReport.email_sent ? { alreadySent: true } : null,
-    existing: true,
-  });
-}
-*/
-
-const synthesisParsed = JSON.parse(synthesisAnalysis);
-
-const report = await finalComposer({
-  openai,
-
-  fullName,
-  birthDate,
-  birthTime,
-  birthPlace,
-
-  western: westernParsed,
-  numerology: numerologyParsed,
-  jyotish: jyotishParsed,
-  chinese: chineseParsed,
-  synthesis: synthesisParsed,
-});
+    // 6. FINAL PREMIUM REPORT
+    const report = await finalComposer({
+      openai,
+      fullName,
+      birthDate,
+      birthTime,
+      birthPlace,
+      western: westernParsed,
+      numerology: numerologyParsed,
+      jyotish: jyotishParsed,
+      chinese: chineseParsed,
+      synthesis: synthesisParsed,
+    });
 
     const safeReport = escapeHtml(report);
 
+    // 7. SAVE REPORT
     const { error: insertError } = await supabase.from("reports").insert({
       full_name: fullName,
       email,
@@ -377,12 +398,14 @@ const report = await finalComposer({
 
     if (insertError) {
       console.error("Supabase insert error:", insertError);
+
       return Response.json(
-        { error: "Failed to save report" },
+        { success: false, error: "Failed to save report" },
         { status: 500 }
       );
     }
 
+    // 8. ADMIN EMAIL
     const adminResult = await resend.emails.send({
       from: "Life Blueprint <onboarding@resend.dev>",
       to: ["lifeblueprint001@gmail.com"],
@@ -398,6 +421,7 @@ const report = await finalComposer({
       `,
     });
 
+    // 9. USER EMAIL
     let userResult = null;
     let emailSent = false;
 
