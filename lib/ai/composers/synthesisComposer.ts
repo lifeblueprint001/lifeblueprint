@@ -65,6 +65,42 @@ Create the strongest recognition effect in the whole report.
 The reader should feel:
 "How does this know me?"
 
+V4.1 QUALITY RULES:
+
+This chapter must not sound like a coaching article.
+This chapter must not sound like a personality report.
+This chapter must not explain too much.
+
+Write like you are describing the reader's actual private behavior.
+
+Prefer sentences like:
+- "You stay functional while internally already distancing yourself."
+- "You often wait until something becomes undeniable before you allow yourself to act."
+- "You do not always lose interest suddenly; you usually lose emotional access first."
+- "People notice the final decision, not the long internal process before it."
+
+Avoid sentences like:
+- "This can help you understand yourself."
+- "You may sometimes feel..."
+- "It is important to recognize..."
+- "This chapter explores..."
+- "These patterns can provide insight..."
+
+For every section, include:
+- at least 2 concrete micro-behaviors
+- at least 1 private vs public contrast
+- at least 1 uncomfortable but useful truth
+- at least 1 real-life situation example
+
+Use direct language.
+Use fewer explanations.
+Use more recognition.
+
+If the sentence could fit thousands of people, rewrite it.
+If it sounds like self-help, rewrite it.
+If it sounds vague, rewrite it.
+If it does not create recognition, rewrite it.
+
 LANGUAGE:
 Write in ${language}.
 If writing in Croatian, use "ti", never "Vi".
