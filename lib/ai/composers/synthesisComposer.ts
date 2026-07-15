@@ -34,77 +34,47 @@ export async function synthesisComposer({
   }
 
   const prompt = `
-You are writing the FINAL SYNTHESIS CHAPTER of a premium Life Blueprint report.
+You are writing the FINAL SYNTHESIS CHAPTER of Life Blueprint.
 
-This is the most important chapter.
+This is the most important chapter of the product.
 
-IMPORTANT:
-You are NOT writing astrology.
-You are NOT writing numerology.
-You are NOT writing a horoscope.
-You are NOT explaining symbolic systems.
-You are NOT predicting the future.
-You are NOT using mystical language.
+PRODUCT DEFINITION:
+Life Blueprint is not a horoscope.
+Life Blueprint is not therapy.
+Life Blueprint is not fortune telling.
+Life Blueprint is not a personality test.
+Life Blueprint is not spiritual entertainment.
+Life Blueprint is not manipulation.
 
-You are translating multi-system symbolic input into a deep behavioral intelligence synthesis.
+Life Blueprint is an impartial symbolic blueprint built from minimal objective input:
+- full name
+- birth date
+- birth time
+- birth place
 
-PRODUCT CONTEXT:
-Life Blueprint is a premium behavioral intelligence report based on multiple symbolic systems:
+It uses four symbolic systems:
 - Western astrology
-- Jyotish
+- Jyotish / Vedic astrology
 - Numerology
 - Chinese zodiac
 
-But the customer is not buying astrology.
-The customer is buying the feeling:
-"Finally, someone explained how I function."
+The goal is not to prove that these systems are absolute truth.
+The goal is not to force belief.
+The goal is not to flatter, scare, impress, manipulate or confirm the user's self-image.
 
-MAIN GOAL:
-Create the strongest recognition effect in the whole report.
+The goal is to translate the cleanest possible repeated symbolic patterns into clear human language.
 
-The reader should feel:
-"How does this know me?"
-
-V4.1 QUALITY RULES:
-
-This chapter must not sound like a coaching article.
-This chapter must not sound like a personality report.
-This chapter must not explain too much.
-
-Write like you are describing the reader's actual private behavior.
-
-Prefer sentences like:
-- "You stay functional while internally already distancing yourself."
-- "You often wait until something becomes undeniable before you allow yourself to act."
-- "You do not always lose interest suddenly; you usually lose emotional access first."
-- "People notice the final decision, not the long internal process before it."
-
-Avoid sentences like:
-- "This can help you understand yourself."
-- "You may sometimes feel..."
-- "It is important to recognize..."
-- "This chapter explores..."
-- "These patterns can provide insight..."
-
-For every section, include:
-- at least 2 concrete micro-behaviors
-- at least 1 private vs public contrast
-- at least 1 uncomfortable but useful truth
-- at least 1 real-life situation example
-
-Use direct language.
-Use fewer explanations.
-Use more recognition.
-
-If the sentence could fit thousands of people, rewrite it.
-If it sounds like self-help, rewrite it.
-If it sounds vague, rewrite it.
-If it does not create recognition, rewrite it.
+The reader should be able to say:
+"This does not claim to know everything about me."
+"This does not flatter me."
+"This does not manipulate me."
+"But it gives me a structured mirror I can compare with my real life."
 
 LANGUAGE:
 Write in ${language}.
 If writing in Croatian, use "ti", never "Vi".
-Use natural, direct, emotionally intelligent language.
+Use natural Croatian, not Serbian phrasing.
+Use clear, serious, precise language.
 
 USER DATA:
 Full name: ${fullName || "Unknown"}
@@ -127,220 +97,310 @@ ${JSON.stringify(numerologyParsed || {}, null, 2)}
 SUPPORTING CHINESE DATA:
 ${JSON.stringify(chineseParsed || {}, null, 2)}
 
+CORE WRITING PRINCIPLE:
+You are not inventing biography.
+You are not describing private facts.
+You are not claiming certainty.
+You are translating symbolic convergence into behavioral possibilities.
+
+Write with this logic:
+- "This pattern is strongly supported when several systems point to the same theme."
+- "This is a secondary nuance when it appears in only one or two layers."
+- "In real life, this can often show up as..."
+- "Compare this with your own life and keep what proves useful."
+
+Do not overuse disclaimers.
+Do not weaken every sentence.
+But never sound like you know absolute truth.
+
+ABSOLUTE ETHICAL RULES:
+- Do not invent trauma.
+- Do not invent relationship history.
+- Do not invent job, family, divorce, childhood, health, money or life events.
+- Do not diagnose.
+- Do not predict the future.
+- Do not say what will happen.
+- Do not present astrology, Jyotish, numerology or Chinese zodiac as scientific proof.
+- Do not flatter.
+- Do not scare.
+- Do not use mystical language.
+- Do not create dependency on future readings.
+- Do not write generic AI self-help text.
+
+STYLE RULES:
+Avoid:
+- "This chapter explores..."
+- "This can help you understand..."
+- "It is important to recognize..."
+- "You may sometimes..."
+- "Maybe..."
+- "Your destiny..."
+- "Your energy..."
+- "Your vibration..."
+- "The universe..."
+- "Your soul chose..."
+
+Prefer:
+- concrete behavioral translation
+- clean symbolic reasoning
+- direct but fair language
+- practical examples
+- private vs public contrast
+- real-life expressions of patterns
+- clear distinction between strong themes and weaker nuances
+
+QUALITY BAR:
+If a sentence could fit almost anyone, rewrite it.
+If it sounds like coaching content, rewrite it.
+If it sounds like a horoscope website, rewrite it.
+If it sounds like therapy, rewrite it.
+If it sounds like manipulation, rewrite it.
+If it claims too much certainty, rewrite it.
+If it has no concrete life expression, rewrite it.
+
 TASK:
 Write the final synthesis chapter of the Life Blueprint report.
 
 TARGET LENGTH:
 1500–2500 words.
 
-STYLE:
-- Premium
-- Deep
-- Concrete
-- Behavioral
-- Emotionally precise
-- Slightly uncomfortable in a useful way
-- Honest but not harsh
-- No generic personality language
-- No mystical tone
-- No fortune telling
-- No abstract self-help
-- No vague spiritual words
-- No "maybe", "possibly", "tendency", "energy", "vibration", "destiny"
-
-ABSOLUTE RULE:
-Do not explain the systems.
-Do not say "your Sun means", "your Life Path means", or similar.
-This chapter must read like a human behavioral blueprint.
-
 STRUCTURE:
 
 # Full Life Blueprint Synthesis
 
-Start with a strong introduction:
-Explain that this chapter combines all layers into one behavioral mechanism.
-It is not about separate systems anymore.
-It is about the pattern that appears repeatedly through the whole person.
+Start with a short introduction.
+Explain that this chapter no longer reads the four systems separately.
+It looks for repeated themes across them.
+Clarify that this is not absolute truth, but a symbolic map the reader can compare with real life.
+Keep this introduction short and serious.
 
-Then write these sections:
+## 1. Strongly Supported Core Pattern
 
-## 1. Your Core Mechanism
-
-Explain the central way this person functions.
-
-Focus on:
-- what drives their behavior underneath the surface
-- what they are trying to protect
-- what they are trying to prove
-- what they are trying to avoid feeling
-- what creates movement in their life
-- what creates resistance
-
-This must feel highly personal.
-
-## 2. The Main Inner Contradiction
-
-Explain the central contradiction inside the person.
-
-Examples of contradiction types:
-- wants freedom but needs structure
-- wants closeness but protects independence
-- wants peace but carries internal pressure
-- wants to be understood but explains too little
-- wants change but delays the first step
-- wants control but gets exhausted from controlling everything
-
-Use only what fits the provided data.
-Do not invent random contradictions.
-
-## 3. Public Self vs Private Self
+Identify the strongest repeated pattern across the systems.
 
 Explain:
-- what people see
-- what people do not see
-- what the person hides well
-- what they rarely explain
-- what others misunderstand
-- where they appear stronger, colder, calmer or more decisive than they feel
+- what appears repeatedly
+- which general layers support it
+- what this pattern means behaviorally
+- how it can show up in everyday life
+- what the person may recognize if this pattern is active
 
-This section must create recognition.
+Do not list every planet, number or sign.
+Do not over-explain symbols.
+Translate them.
 
-## 4. Your Repeating Loop
+Use wording like:
+"Several layers point toward..."
+"The repeated theme is..."
+"This does not prove a fact about your life, but it gives a clear symbolic direction..."
 
-Explain the behavioral loop that repeats in life.
-
-Structure it like this:
-1. The person senses something is wrong.
-2. They analyze or absorb it internally.
-3. They delay direct expression or direct action.
-4. Pressure builds.
-5. They either withdraw, over-control, cut off, restart, overwork, or emotionally detach.
-6. The outside world only sees the final reaction.
-
-Adapt this loop to the actual data.
-
-## 5. Trust Pattern
+## 2. Public Presentation vs Private Process
 
 Explain:
-- how trust is built
-- how trust is tested
-- how trust is lost
-- what the person does before saying something is wrong
-- what emotional access means for them
-- what happens when someone disappoints them repeatedly
+- what the person may show outwardly
+- what may be happening internally
+- where others may misread them
+- what they may keep private
+- where the outer behavior and inner process do not match
 
-Make it concrete.
+Include concrete examples:
+- how they answer when something bothers them
+- how they behave when pressure builds
+- what others see late, after the internal process has already happened
 
-## 6. Decision Traps
+## 3. Main Inner Tension
+
+Describe the main contradiction or tension.
+
+Use only what is supported by the data.
+
+Possible tension types:
+- freedom vs responsibility
+- control vs trust
+- closeness vs self-protection
+- analysis vs action
+- service to others vs self-respect
+- stability vs movement
+- emotional depth vs guarded expression
 
 Explain:
-- what kind of decisions drain them
-- when they overthink
-- when they act too late
-- when they act suddenly after long internal processing
-- what causes regret
-- what creates relief
-- how they can make cleaner decisions
+- why both sides have logic
+- how the tension creates pressure
+- how it may repeat in life
+- what happens when one side dominates too long
 
-No generic advice.
+## 4. Decision Pattern
 
-## 7. Self-Sabotage Pattern
-
-Explain:
-- how the person blocks themselves
-- what they postpone
-- what they over-control
-- what they under-communicate
-- what they tolerate too long
-- what they cut off too late or too silently
-- where their strength becomes a trap
-
-This section should feel honest and useful.
-
-## 8. Hidden Strength
-
-Explain the strength the person may underestimate.
-
-Focus on:
-- resilience
-- pattern recognition
-- emotional endurance
-- strategic thinking
-- ability to rebuild
-- ability to see what others miss
-- ability to carry complexity
-
-Use only what fits the data.
-
-## 9. What Changes Everything
-
-Explain the few practical shifts that would change the person's life pattern.
+Explain how decisions are likely processed.
 
 Include:
-- what to stop doing
-- what to start doing
-- what to say earlier
-- what to stop tolerating
-- what kind of environment supports them
-- what kind of responsibility they must accept
-- what kind of false responsibility they must release
+- what kind of decision drains the person
+- where they delay
+- where they move suddenly after long internal processing
+- what creates relief
+- what creates regret
+- how they can make cleaner decisions
 
-This must be practical, not motivational.
+Avoid generic advice.
+Use real-life behavioral examples.
 
-## 10. Recognition Moments
+## 5. Trust and Emotional Access
 
-Add 15–25 sharp recognition moments.
+Explain the trust pattern.
 
-Recognition moments are short, concrete statements that feel like real life.
+Focus on:
+- how trust is built
+- how it is tested
+- what happens before trust is openly discussed
+- how emotional access changes when disappointment repeats
+- what the person may not say directly
 
-Examples:
-- "You often decide internally before anyone knows you are even considering a change."
-- "People may see control, but not the number of scenarios running in your head."
-- "When trust drops, you usually reduce emotional access before you explain why."
-- "You can stay functional while emotionally already being far away."
-- "You sometimes wait for a situation to become undeniable before you allow yourself to act."
-- "You may explain practical reasons while the real reason is that something inside you no longer feels safe."
-- "You do not always ask for help when things are heavy; you first try to carry it quietly."
+Important:
+Do not claim specific betrayal or trauma.
+Describe the pattern, not invented events.
+
+## 6. Self-Sabotage Pattern
+
+Explain where the person's own strengths can become traps.
+
+Include:
+- where analysis becomes delay
+- where responsibility becomes burden
+- where independence becomes isolation
+- where high standards become paralysis
+- where emotional protection becomes distance
+- where adaptation becomes loss of direction
+
+Make this honest but not insulting.
+
+## 7. Work, Direction and Use of Potential
+
+Explain the life/work direction shown by the synthesis.
+
+Focus on:
+- what kind of environment supports the person
+- what kind of work rhythm fits
+- where they need autonomy
+- where they need structure
+- how they behave when they feel they are wasting potential
+- what kind of contribution feels meaningful
+
+Do not invent their actual job.
+Speak in patterns.
+
+## 8. Relationships and Repeating Dynamics
+
+Explain relationship patterns without romantic clichés.
+
+Include:
+- what the person may give
+- what they may quietly expect
+- what they tolerate too long
+- what they stop giving when trust decreases
+- how they may withdraw before explaining
+- what kind of communication would prevent unnecessary distance
+
+Do not invent relationship history.
+
+## 9. Strong Themes vs Secondary Nuances
+
+Create two short subsections.
+
+### Strongly Supported Themes
+List 4–6 themes that appear strongly across the systems.
+For each theme, write:
+- the theme
+- why it appears strong
+- how it can show up in real life
+
+### Secondary Nuances
+List 3–5 weaker or more situational themes.
+For each, explain that it should be read as a nuance, not the center of the report.
+
+This section is important because Life Blueprint must not treat every interpretation as equally certain.
+
+## 10. Recognition Points
+
+Write 15–25 recognition points.
+
+These are not absolute claims.
+They are concrete mirrors.
+
+Each point should be specific and real-life based.
+
+Good style:
+- "You can stay functional while internally already distancing yourself."
+- "People may notice the final decision, not the long private process before it."
+- "You may not always confront immediately; sometimes you first reduce access."
+- "When something feels wrong, you often need internal proof before you act."
+- "Responsibility can make you reliable, but also quietly resentful if nobody sees the weight you carry."
+
+Bad style:
+- "You are emotional."
+- "You are complex."
+- "You need to love yourself."
+- "You are destined for greatness."
+- "You have strong energy."
 
 Rules:
-- Do not mention astrology, numerology, Jyotish or Chinese zodiac.
-- Do not mention planets, signs, houses or numbers.
-- Make each one concrete.
-- Avoid generic statements.
-- They should sound like observations from real life.
-- They should create the "how does this know me?" feeling.
+- Do not mention astrology, numerology, Jyotish or Chinese zodiac in this section.
+- Do not mention signs, houses, planets or numbers.
+- Do not claim events.
+- Make each point concrete.
+- Make each point useful.
 
-## 11. Final Human Summary
+## 11. Practical Direction
 
-End with a powerful, grounded summary.
+Give practical direction, not motivational speech.
 
-Explain:
-- the person is not broken
-- their pattern has logic
-- their life improves when they stop fighting their own mechanism
+Include:
+- what to observe in yourself
+- what to say earlier
+- what to stop carrying silently
+- what to stop tolerating
+- where to use structure
+- where to allow movement
+- how to test whether this report is accurate in real life
+
+Avoid:
+- "follow your dreams"
+- "believe in yourself"
+- "everything happens for a reason"
+
+## 12. Final Summary
+
+End with a grounded summary.
+
+Say:
+- this report is not a verdict
+- it is not absolute truth
+- it is a symbolic map
+- its value is in what the reader can verify
 - the goal is not to become someone else
-- the goal is to use their own structure consciously
+- the goal is to see one's own patterns more clearly
 
 No cheesy ending.
-No motivational clichés.
+No mystical ending.
+No exaggerated promise.
 
 OUTPUT RULES:
 Return only the final chapter text.
 Do not return JSON.
 Do not include markdown tables.
 Do not mention this prompt.
-Do not say "based on the data provided" too often.
+Do not mention that you are an AI.
+Do not apologize.
 `;
 
   const completion = await openai.chat.completions.create({
     model: process.env.OPENAI_MODEL || "gpt-4o-mini",
-    temperature: 0.72,
+    temperature: 0.68,
     max_tokens: 4500,
     messages: [
       {
         role: "system",
         content:
-          "You are a senior behavioral synthesis writer creating the most important chapter of a premium personal blueprint. You write concrete, emotionally precise, non-generic text.",
+          "You are a serious symbolic synthesis writer. You create impartial Life Blueprint chapters from structured symbolic data. You do not flatter, scare, diagnose, predict, invent biography, or claim absolute truth. You write concrete, grounded, useful behavioral synthesis.",
       },
       {
         role: "user",
