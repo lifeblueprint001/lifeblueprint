@@ -26,26 +26,41 @@ export async function jyotishComposer({
   }
 
   const prompt = `
-You are writing the JYOTISH / VEDIC ASTROLOGY CHAPTER of a premium Life Blueprint report.
+You are writing the JYOTISH / VEDIC ASTROLOGY CHAPTER of a Life Blueprint report.
 
-IMPORTANT:
-You are NOT writing a mystical Vedic astrology reading.
-You are NOT predicting fate.
-You are NOT using spiritual clichés.
-You are NOT writing about karma in a vague or religious way.
-You are NOT explaining Jyotish theory.
+PRODUCT DEFINITION:
+Life Blueprint is not a horoscope.
+Life Blueprint is not fortune telling.
+Life Blueprint is not therapy.
+Life Blueprint is not spiritual entertainment.
+Life Blueprint is not a personality test.
 
-You are translating Jyotish data into a grounded life-pattern and behavioral-direction chapter.
+Life Blueprint is an impartial symbolic blueprint built from minimal objective input:
+- full name
+- birth date
+- birth time
+- birth place
 
-PRODUCT CONTEXT:
-Life Blueprint is a premium behavioral intelligence report based on multiple symbolic systems.
-The user should feel:
-"This is not a horoscope. This explains the deeper pattern behind my life choices."
+This chapter uses Jyotish / Vedic astrology as one symbolic system.
+The goal is not to convince the reader that Jyotish is absolute truth.
+The goal is not to predict destiny.
+The goal is not to use spiritual authority.
+
+The goal is to translate the Jyotish configuration into a clear, grounded map of:
+- life direction
+- inner pressure
+- maturity themes
+- responsibility patterns
+- repeated tensions
+- relationship lessons
+- work and contribution patterns
+- self-observation points
 
 LANGUAGE:
 Write in ${language}.
 If writing in Croatian, use "ti", never "Vi".
-Use natural, clear, serious and emotionally intelligent language.
+Use natural Croatian, not Serbian phrasing.
+Use clean, serious, precise language.
 
 USER DATA:
 Full name: ${fullName || "Unknown"}
@@ -56,156 +71,307 @@ Place of birth: ${birthPlace || "Unknown"}
 JYOTISH STRUCTURED DATA:
 ${JSON.stringify(jyotishParsed, null, 2)}
 
+CORE WRITING PRINCIPLE:
+Jyotish is used here as a symbolic system of life patterning.
+The report must not sound fatalistic.
+The report must not sound religious.
+The report must not sound mystical.
+The report must not sound like spiritual coaching.
+
+Symbols are the foundation.
+The report is the translation.
+
+Use the Jyotish data seriously, but translate it into:
+- life themes
+- pressure points
+- maturity patterns
+- responsibility and resistance
+- emotional learning
+- relational dynamics
+- work and service direction
+- repeating inner lessons
+- practical self-observation
+
+IMPORTANT ETHICAL RULES:
+- Do not invent biography.
+- Do not invent trauma.
+- Do not invent relationship history.
+- Do not invent job, family, divorce, childhood, health or life events.
+- Do not diagnose.
+- Do not predict the future.
+- Do not say what will happen.
+- Do not present Jyotish as scientific proof.
+- Do not present Jyotish as spiritual authority.
+- Do not flatter.
+- Do not scare.
+- Do not use fatalistic karma language.
+- Do not say the person is punished by karma.
+- Do not say something is destined.
+- Do not create dependency on future readings.
+- Do not write generic AI self-help content.
+
+STYLE RULES:
+Avoid:
+- "Your destiny..."
+- "Your karma forces you..."
+- "The universe..."
+- "Your soul chose..."
+- "You are meant to..."
+- "This chapter explores..."
+- "This can help you understand..."
+- "It is important to recognize..."
+- repeated soft phrases like "možeš" in every sentence
+- exaggerated certainty
+- vague spiritual labels
+- motivational coaching tone
+
+Prefer:
+- "This Jyotish layer points toward..."
+- "Symbolically, this suggests..."
+- "In real life, this can often show up as..."
+- "This should be read as a pattern, not a fixed fate."
+- "If this pattern is active, it may be visible through..."
+- concrete life expressions
+- pressure and maturity language
+- direct but fair interpretation
+- clear separation between strong themes and secondary nuances
+
+QUALITY BAR:
+If a sentence could fit almost anyone, rewrite it.
+If it sounds like spiritual coaching, rewrite it.
+If it sounds fatalistic, rewrite it.
+If it sounds like therapy, rewrite it.
+If it sounds like motivational content, rewrite it.
+If it claims too much certainty, rewrite it.
+If it does not translate a symbol into real life expression, rewrite it.
+
 TASK:
-Write a premium Jyotish chapter for the user's Life Blueprint report.
+Write the Jyotish / Vedic Astrology chapter of the Life Blueprint report.
 
 TARGET LENGTH:
-1000–2000 words.
-
-STYLE:
-- Premium
-- Grounded
-- Deep
-- Behavioral
-- Serious
-- Mature
-- No mystical language
-- No predictions
-- No religious tone
-- No "karma" unless explained as repeating behavioral consequence
-- No vague spiritual phrases
-- No generic Vedic astrology descriptions
-- No "maybe", "possibly", "tendency", "energy", "vibration", "destiny"
-
-MAIN GOAL:
-Use Jyotish as a life-direction system.
-The chapter should explain:
-- the deeper life lesson
-- the repeating internal conflict
-- the growth path
-- the pressure points
-- the difference between what the person wants and what life repeatedly forces them to develop
+1100–1900 words.
 
 STRUCTURE:
 
 # Jyotish Life Direction
 
-Start with a short introduction:
-Explain that this chapter does not predict the future.
-It describes the deeper life-direction pattern, inner lessons and recurring psychological pressure shown through the Jyotish layer.
+Start with a short introduction.
+Explain that this chapter uses Jyotish as a symbolic layer of life direction, pressure and maturity.
+Clarify that this is not prediction, fate or spiritual authority.
+Keep it short and serious.
 
-Then write these sections:
+## 1. Main Jyotish Indicators
 
-## 1. The Deeper Life Theme
+Briefly name the most important Jyotish indicators from the structured data.
 
-Explain:
-- what kind of inner development this person repeatedly faces
-- what life keeps asking them to mature into
-- what pattern they cannot avoid forever
-- what becomes easier when they stop resisting their own direction
+Use only the indicators that are actually available.
 
-Keep this practical and psychological.
+Possible indicators may include:
+- Lagna / Ascendant
+- Moon / Rashi
+- Sun
+- Nakshatra if available
+- Saturn
+- Jupiter
+- Rahu and Ketu
+- house themes
+- dharma, artha, kama, moksha emphasis if available
+- major life-direction indicators
 
-## 2. Inner Conflict And Growth Pressure
+For each important indicator, write one clear sentence:
+- what the indicator generally represents
+- what this specific placement symbolically points toward
 
-Explain:
-- the main internal tension
-- what the person wants versus what they actually need to develop
-- where they may feel pulled in two directions
-- where they repeat the same emotional or practical lesson
-- what type of pressure creates growth
+Do not overwhelm the reader.
+This section should orient them, not teach Jyotish theory.
 
-Avoid dramatic language.
+## 2. Deeper Life Theme
 
-## 3. Emotional Maturity Pattern
-
-Explain:
-- how emotional maturity develops for this person
-- what emotional reactions must become more conscious
-- where they protect themselves too strongly
-- where they must learn patience, boundaries or courage
-- what emotional behavior creates unnecessary complications
-
-Use real-life examples.
-
-## 4. Duty, Responsibility And Resistance
+Identify the main life-direction pattern shown by this Jyotish layer.
 
 Explain:
-- where the person feels responsibility
-- what they resist because it feels heavy
-- what they postpone
-- what they know internally but delay acting on
-- what kind of discipline changes their life
+- what theme appears central
+- what kind of pressure or direction it creates
+- what the person may repeatedly need to mature through
+- what becomes difficult when this theme is resisted
+- what becomes clearer when this theme is handled consciously
 
-This section should feel honest, not motivational.
+Do not predict events.
+Translate the symbolic theme into life pattern.
 
-## 5. Relationship Lessons
+## 3. Inner Pressure and Growth Tension
+
+Describe the main inner tension.
+
+Possible examples:
+- duty vs personal desire
+- stability vs movement
+- independence vs belonging
+- service vs self-respect
+- control vs surrender
+- ambition vs emotional balance
+- discipline vs resistance
+
+Use only what is supported by the data.
+
+Explain how this tension may show up in real life:
+- delayed decisions
+- taking on too much
+- resisting what one already knows must be done
+- appearing calm while carrying pressure privately
+- needing proof before acting
+
+## 4. Emotional Maturity Pattern
+
+Describe the emotional maturation pattern.
+
+Focus on:
+- how emotional pressure is processed
+- what may be protected or hidden
+- where emotional reactions become stronger than expected
+- what kind of situations demand more maturity
+- where the person may need to speak earlier instead of carrying things silently
+
+Do not claim trauma.
+Do not invent past emotional events.
+
+## 5. Duty, Responsibility and Resistance
+
+Describe the responsibility pattern.
 
 Explain:
-- what relationships teach this person
-- what kind of dynamic repeats
-- how they test trust
-- what they tolerate too long
-- what they cut off too silently
-- what they must learn about attachment, loyalty and self-respect
+- what type of responsibility may feel natural
+- what type may feel heavy
+- where discipline supports the person
+- where responsibility becomes quiet resentment
+- where resistance appears when the person feels trapped
+- how structure can help without becoming a prison
 
-No romantic clichés.
+Keep this grounded and practical.
 
-## 6. Work, Service And Direction
+## 6. Relationships and Trust Lessons
+
+Describe relationship themes through Jyotish symbolism.
+
+Focus on:
+- trust
+- emotional access
+- loyalty
+- expectation
+- withdrawal
+- boundaries
+- giving too much or withholding too long
+- what kind of communication prevents unnecessary distance
+
+Do not write romantic clichés.
+Do not invent relationship history.
+
+## 7. Work, Service and Direction
+
+Explain the work and contribution pattern.
+
+Focus on:
+- what kind of contribution may feel meaningful
+- how the person relates to useful work
+- where they need structure
+- where they need autonomy
+- where they may feel underused
+- how pressure builds when effort has no meaning
+- what kind of role may support maturity
+
+Do not invent the actual job.
+
+## 8. Repeating Life Lesson
+
+Describe the repeating symbolic lesson shown by this Jyotish layer.
+
+This should not sound like fate.
+It should sound like a pattern the reader can observe.
 
 Explain:
-- what type of work direction fits the deeper pattern
-- how the person is meant to become useful
-- what kind of role develops confidence
-- where they must stop wasting potential
-- what type of contribution feels meaningful
+- what keeps repeating as a theme
+- what the person may be asked to balance
+- what happens when the pattern is ignored
+- what becomes possible when the pattern is seen clearly
 
-Keep it grounded and practical.
+## 9. Strong Jyotish Themes vs Secondary Nuances
 
-## 7. The Repeating Life Lesson
+Create two short subsections.
 
-Write the clearest synthesis of this Jyotish layer.
+### Strong Jyotish Themes
+List 4–6 themes that are strongly visible in the Jyotish data.
+For each:
+- name the theme
+- mention the general indicators supporting it
+- translate it into real-life behavior
 
-Explain:
-- the main repeating lesson
-- the unconscious loop
-- the behavior that keeps creating the same result
-- the behavior that breaks the loop
-- what this person becomes when they accept the lesson
+### Secondary Nuances
+List 3–5 themes that are present but should not dominate the interpretation.
+For each:
+- explain why it is a nuance
+- how it may show up situationally
 
-## 8. Jyotish Recognition Moments
+This section is important because Life Blueprint must not treat every symbol as equally certain.
 
-Add 8–12 short recognition moments.
+## 10. Jyotish Recognition Points
 
-Recognition moments are concrete observations like:
-- "You often know what must change long before you are ready to act on it."
-- "You can carry responsibility silently and then feel unseen because nobody realized how much you were carrying."
-- "You do not always leave situations when they become wrong; first you detach internally."
+Write 8–12 concrete recognition points.
 
 Rules:
-- Do not mention Jyotish in the recognition moments.
-- Do not mention planets unless necessary.
-- Make them concrete.
-- Make them feel like real life.
-- Avoid generic statements.
+- No predictions.
+- No biography.
+- No therapy language.
+- No mystical language.
+- No fatalistic karma language.
+- No signs, houses or technical Jyotish terms in this section.
+- Each point must be concrete enough that the reader can compare it with real life.
+
+Good style:
+- "You may carry responsibility quietly and only later realize how heavy it became."
+- "You may resist a decision not because you do not know the answer, but because the answer changes your structure."
+- "You may stay functional while internally already distancing yourself from something."
+- "When effort loses meaning, discipline can turn into silent resistance."
+
+Bad style:
+- "You are karmically destined..."
+- "Your soul must learn..."
+- "You are spiritual."
+- "You are emotional."
+- "Everything happens for a reason."
+
+## 11. Jyotish Chapter Summary
+
+End with a grounded summary.
+
+Say:
+- this is only the Jyotish layer
+- it is not the whole Life Blueprint
+- it does not define fate
+- its value is in the themes the reader can verify
+- the final synthesis will compare this layer with the other systems
+
+No mystical ending.
+No exaggerated promise.
+No motivational speech.
 
 OUTPUT RULES:
-Return only the final chapter text.
+Return only the Jyotish chapter text.
 Do not return JSON.
 Do not include markdown tables.
 Do not mention this prompt.
-Do not say "based on the data provided" too often.
+Do not mention that you are an AI.
+Do not apologize.
 `;
 
   const completion = await openai.chat.completions.create({
     model: process.env.OPENAI_MODEL || "gpt-4o-mini",
-    temperature: 0.75,
-    max_tokens: 3800,
+    temperature: 0.68,
+    max_tokens: 4000,
     messages: [
       {
         role: "system",
         content:
-          "You are a senior behavioral analysis writer creating a premium Jyotish-based life direction chapter. You write grounded, concrete, non-mystical text.",
+          "You are a serious symbolic interpretation writer for Life Blueprint. You translate Jyotish into impartial life-direction and maturity patterns without prediction, fatalism, flattery, fear, diagnosis, biography invention, or mystical authority.",
       },
       {
         role: "user",
