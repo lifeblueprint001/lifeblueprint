@@ -26,25 +26,37 @@ export async function westernComposer({
   }
 
   const prompt = `
-You are writing the WESTERN ASTROLOGY CHAPTER of a premium Life Blueprint report.
+You are writing the WESTERN ASTROLOGY CHAPTER of a Life Blueprint report.
 
-IMPORTANT:
-You are NOT writing a horoscope.
-You are NOT writing mystical astrology content.
-You are NOT predicting the future.
-You are NOT explaining astrology theory.
+PRODUCT DEFINITION:
+Life Blueprint is not a horoscope.
+Life Blueprint is not fortune telling.
+Life Blueprint is not therapy.
+Life Blueprint is not spiritual entertainment.
+Life Blueprint is not a personality test.
 
-You are translating Western astrology data into a deep behavioral intelligence chapter.
+Life Blueprint is an impartial symbolic blueprint built from minimal objective input:
+- full name
+- birth date
+- birth time
+- birth place
 
-PRODUCT CONTEXT:
-Life Blueprint is a premium behavioral report based on multiple symbolic systems.
-The user should feel:
-"This is not a horoscope. This is a book about how I function."
+This chapter uses Western astrology as one symbolic system.
+The goal is not to convince the reader that astrology is absolute truth.
+The goal is to translate the Western astrological configuration into a clear, grounded behavioral map.
+
+The reader should see:
+- which main Western indicators are being used
+- what they symbolically point toward
+- how those symbols can translate into behavior, decisions, pressure, relationships and life direction
+- what is strongly visible in this system
+- what is only a secondary nuance
 
 LANGUAGE:
 Write in ${language}.
 If writing in Croatian, use "ti", never "Vi".
-Use natural, clear, emotionally intelligent language.
+Use natural Croatian, not Serbian phrasing.
+Use clean, serious, precise language.
 
 USER DATA:
 Full name: ${fullName || "Unknown"}
@@ -52,204 +64,302 @@ Date of birth: ${birthDate || "Unknown"}
 Time of birth: ${birthTime || "Unknown"}
 Place of birth: ${birthPlace || "Unknown"}
 
-WESTERN ASTROLOGY STRUCTURED DATA:
+WESTERN STRUCTURED DATA:
 ${JSON.stringify(westernParsed, null, 2)}
 
+CORE WRITING PRINCIPLE:
+Symbols are the foundation.
+The report is the translation.
+
+Do not bury the reader in astrology theory.
+Do not write an encyclopedia of signs, houses and planets.
+Do not write generic horoscope text.
+
+Use the astrological data seriously, but translate it into:
+- behavior
+- pressure patterns
+- emotional processing
+- decision habits
+- public vs private contrast
+- relational tendencies
+- work and ambition patterns
+- self-sabotage risks
+- usable self-observation
+
+IMPORTANT ETHICAL RULES:
+- Do not invent biography.
+- Do not invent trauma.
+- Do not invent relationship history.
+- Do not invent job, family, divorce, childhood, health or life events.
+- Do not diagnose.
+- Do not predict the future.
+- Do not say what will happen.
+- Do not present astrology as scientific proof.
+- Do not flatter.
+- Do not scare.
+- Do not use mystical language.
+- Do not write like a horoscope website.
+- Do not write generic AI self-help content.
+
+STYLE RULES:
+Avoid:
+- "Your destiny..."
+- "The universe..."
+- "Your energy..."
+- "Your vibration..."
+- "You are meant to..."
+- "This chapter explores..."
+- "This can help you understand..."
+- "It is important to recognize..."
+- "You may sometimes..." repeated too often
+- exaggerated certainty
+- vague personality labels
+
+Prefer:
+- "This configuration points toward..."
+- "In behavior, this can often look like..."
+- "The stronger Western indicators suggest..."
+- "This should be read as a pattern, not a fixed identity."
+- "If this is active in your life, it may show up as..."
+- concrete real-life examples
+- private vs public contrast
+- honest but fair language
+
+QUALITY BAR:
+If a sentence could fit almost anyone, rewrite it.
+If it sounds like entertainment astrology, rewrite it.
+If it sounds like therapy, rewrite it.
+If it sounds like motivational coaching, rewrite it.
+If it claims too much certainty, rewrite it.
+If it does not translate a symbol into real behavior, rewrite it.
+
 TASK:
-Write a long premium chapter about the user's Western Astrology Blueprint.
+Write the Western Astrology chapter of the Life Blueprint report.
 
 TARGET LENGTH:
-1500–2500 words.
-
-STYLE:
-- Premium
-- Personal
-- Concrete
-- Behavioral
-- Deep
-- Direct
-- Human
-- No generic astrology phrases
-- No fortune telling
-- No vague spiritual language
-- No "maybe", "possibly", "tendency", "energy", "vibration", "destiny"
-- Do not sound like TikTok astrology
-- Do not sound like a textbook
-- Do not over-explain signs, planets or houses
-
-MAIN GOAL:
-Create recognition.
-The reader must feel:
-"How does this know me?"
+1300–2200 words.
 
 STRUCTURE:
 
 # Western Astrology Blueprint
 
-Start with a short introduction explaining that this chapter does not describe personality in a generic way, but the visible and invisible behavioral architecture shown through the Western chart.
+Start with a short introduction.
+Explain that this chapter uses Western astrology as a symbolic system.
+Clarify that it is not a verdict, prediction or absolute truth.
+Keep it short.
 
-Then write these sections:
+## 1. Main Western Indicators
 
-## 1. How People Experience You First
+Briefly name the most important Western indicators from the data.
 
-Use Ascendant data if available.
-Explain:
-- first impression
-- social mask
-- how others read the user before they know them
-- what the user may not realize they project
-- the difference between outer behavior and inner reality
+Use only the indicators that are actually available in the structured data.
 
-Include concrete real-life examples.
+Include things like:
+- Sun
+- Moon
+- Ascendant
+- Mercury
+- Venus
+- Mars
+- Jupiter
+- Saturn
+- Midheaven / MC
+- houses or dominant themes if available
 
-## 2. Core Identity And Inner Direction
+For each, give one clear sentence:
+- what the indicator generally represents
+- what this specific placement points toward
 
-Use Sun data if available.
-Explain:
-- identity pattern
-- what gives the person a sense of self
-- what they need to respect in themselves
-- where they become weaker when they betray themselves
-- how they behave when they are aligned vs. misaligned
+Do not over-explain.
+This section should orient the reader, not overwhelm them.
 
-Do not explain the Sun sign theoretically.
-Translate it into behavior.
+## 2. Core Behavioral Pattern
 
-## 3. Emotional Pattern And Private Reactions
-
-Use Moon data if available.
-Explain:
-- emotional needs
-- private reactions
-- what hurts more than the person admits
-- how they protect themselves emotionally
-- what they do when overwhelmed
-- what others often misunderstand
-
-Include micro behaviors.
-
-## 4. Mind, Communication And Decision Logic
-
-Use Mercury data if available.
-Explain:
-- how the mind works
-- how the user processes information
-- how they speak when calm
-- how they speak under pressure
-- decision traps
-- overthinking patterns
-- what type of communication drains them
-
-Make this practical.
-
-## 5. Love, Attachment And Trust
-
-Use Venus data if available.
-Explain:
-- how the user bonds
-- what they need to feel safe
-- what makes them withdraw
-- what they secretly test in people
-- what they give too much of
-- what they stop giving when trust is damaged
-
-No romantic clichés.
-Make it psychologically real.
-
-## 6. Drive, Anger And Action Pattern
-
-Use Mars data if available.
-Explain:
-- how the user takes action
-- how they handle anger
-- how they compete
-- what motivates them
-- what blocks movement
-- how frustration shows up
-- what they do instead of directly confronting something
-
-Include real behavior examples.
-
-## 7. Growth, Confidence And Opportunity Pattern
-
-Use Jupiter data if available.
-Explain:
-- where the person expands
-- where confidence grows
-- what type of environment helps them
-- where they may overdo things
-- what kind of opportunity fits them naturally
-
-Avoid exaggerated positivity.
-Keep it grounded.
-
-## 8. Fear, Pressure And Self-Discipline
-
-Use Saturn data if available.
-Explain:
-- pressure points
-- fear patterns
-- where the user feels tested
-- what they avoid because it feels heavy
-- where maturity is built
-- what becomes a strength through discipline
-
-This section should feel serious and useful.
-
-## 9. Work Direction And Public Role
-
-Use Midheaven data if available.
-Explain:
-- public direction
-- career behavior
-- how the person wants to be respected
-- what kind of work identity fits
-- what kind of authority they resist
-- how they behave when they feel they are wasting potential
-
-## 10. Western System Synthesis
-
-Create a deep synthesis of the Western chart.
-Do not repeat previous sections.
+Translate the strongest Western pattern into behavior.
 
 Explain:
-- the main behavioral contradiction
-- the difference between public self and private self
-- the repeating life pattern
-- the self-sabotage pattern
-- the hidden strength
-- the kind of life situation that activates the best version of this person
+- what appears central in this system
+- how identity, instinct and behavior seem to organize themselves
+- what the person may repeatedly try to improve, control, prove, protect or understand
+- how this may show up in everyday life
 
-Add 8-12 "Recognition Moments".
+Use concrete examples, but do not invent life events.
 
-Recognition moments are short, sharp observations like:
-- "You often decide internally before anyone knows you have already changed direction."
-- "People may see control, but not the amount of scenarios running in your head."
-- "When trust drops, you usually reduce emotional access before you explain why."
+## 3. Public Presentation vs Private Process
 
-Rules for Recognition Moments:
-- They must be concrete.
-- They must not be generic.
-- They must sound like real life.
-- They must not mention astrology.
+Use Ascendant, Moon, Sun and relevant planets to describe the difference between:
+- how the person may appear outwardly
+- what may happen privately
+- what others may misread
+- what the person may not show immediately
+
+Include real behavioral contrast.
+
+Example style:
+"Outwardly, this can look like composure. Privately, the process may be much more active, critical or emotionally charged."
+
+## 4. Emotional Processing
+
+Use the Moon and relevant emotional indicators.
+
+Describe:
+- what the emotional system may need
+- what creates pressure
+- how emotions may be protected, hidden, dramatized, analyzed or controlled
+- what happens when emotions are not expressed directly
+- what others may not understand about the person emotionally
+
+Do not claim trauma.
+Describe pattern only.
+
+## 5. Mind, Speech and Decision Logic
+
+Use Mercury and relevant analytical indicators.
+
+Explain:
+- how the mind processes information
+- what kind of details it notices
+- where analysis becomes strength
+- where analysis becomes delay, criticism or overload
+- how communication may change under pressure
+
+Include concrete examples:
+- how the person responds in conflict
+- how they think before speaking
+- what kind of unclear communication frustrates them
+
+## 6. Love, Attachment and Trust
+
+Use Venus, 7th house themes if available, Moon and related indicators.
+
+Explain:
+- what the person may seek in closeness
+- how trust is built
+- what they may give quietly
+- what they may expect but not say
+- how disappointment may change emotional access
+- where protection can become distance
+
+Do not write romantic clichés.
+Do not invent relationship history.
+
+## 7. Action, Anger and Pressure
+
+Use Mars and relevant pressure indicators.
+
+Explain:
+- how action is taken
+- what triggers intensity
+- how anger or frustration may be expressed or controlled
+- what happens when pressure builds for too long
+- where the person may become silent, sharp, strategic, impatient or withdrawn
+
+Make it behavioral, not dramatic.
+
+## 8. Responsibility, Fear and Maturity
+
+Use Saturn and relevant structural indicators.
+
+Explain:
+- where the chart shows pressure, responsibility or self-discipline
+- what kind of fear may slow expression
+- where high standards help
+- where high standards become punishment
+- what maturity means in this symbolic system
+
+Do not shame the person.
+Do not soften too much.
+
+## 9. Work Direction and Public Role
+
+Use Midheaven / MC, 10th house themes and relevant planets if available.
+
+Explain:
+- what kind of contribution this system points toward
+- how the person may want to be respected
+- what kind of work environment may support them
+- where they may feel underused
+- what happens when their depth, precision or effort is not recognized
+
+Do not invent the actual job.
+
+## 10. Strong Western Themes vs Secondary Nuances
+
+Create two short subsections.
+
+### Strong Western Themes
+List 4–6 themes that are strongly visible in the Western data.
+For each:
+- name the theme
+- mention the general indicators supporting it
+- translate it into real-life behavior
+
+### Secondary Nuances
+List 3–5 themes that are present but should not dominate the interpretation.
+For each:
+- explain why it is a nuance
+- how it may show up situationally
+
+This is important because Life Blueprint must not treat every symbol as equally important.
+
+## 11. Western Recognition Points
+
+Write 10–15 concrete recognition points.
+
+Rules:
+- No predictions.
+- No biography.
+- No therapy language.
+- No mystical language.
+- No generic personality labels.
+- No signs, houses or planet names in this section.
+- Each point must be concrete enough that the reader can compare it with real life.
+
+Good style:
+- "People may notice the final decision, not the long private process before it."
+- "You can appear calm while internally sorting details, risks and emotional reactions."
+- "When trust decreases, you may reduce access before you explain what changed."
+- "You may become sharp not because you want conflict, but because something has been processed internally for too long."
+
+Bad style:
+- "You are emotional."
+- "You are strong."
+- "You are complex."
+- "You need to believe in yourself."
+- "You have powerful energy."
+
+## 12. Western Chapter Summary
+
+End with a grounded summary.
+
+Say:
+- this is only the Western layer
+- it is not the whole Life Blueprint
+- its strongest value is in the patterns the reader can verify
+- the final synthesis will compare this layer with the other systems
+
+No mystical ending.
+No exaggerated promise.
+No motivational speech.
 
 OUTPUT RULES:
-Return only the final chapter text.
+Return only the Western chapter text.
 Do not return JSON.
 Do not include markdown tables.
 Do not mention this prompt.
-Do not say "based on the data provided" too often.
+Do not mention that you are an AI.
+Do not apologize.
 `;
 
   const completion = await openai.chat.completions.create({
     model: process.env.OPENAI_MODEL || "gpt-4o-mini",
-    temperature: 0.75,
-    max_tokens: 4500,
+    temperature: 0.68,
+    max_tokens: 4300,
     messages: [
       {
         role: "system",
         content:
-          "You are a senior behavioral analysis writer creating a premium personal report chapter. You write concrete, emotionally intelligent, non-generic text.",
+          "You are a serious symbolic interpretation writer for Life Blueprint. You translate Western astrology into impartial behavioral patterns without prediction, flattery, fear, diagnosis, biography invention, or mystical language.",
       },
       {
         role: "user",
